@@ -16,6 +16,7 @@
         width: 1200px;
         height: 900px;
         margin: auto;
+        padding: 50px;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -105,12 +106,18 @@
         padding: 20px 30px;
         font-size: 16px;
     }
-    .revol::before{
-        content: "因為我們做了這些革新 ----------------------------------------------------------------------------------------";
-        display: block;
+    .revol-title{
         color: rgb(182, 3, 3);
         font-weight: bold;
         margin-bottom: 10px;
+        display: flex;
+    }
+    .revol-title::after{
+        content: "";
+        width: 450px;
+        border-bottom: 2px solid rgb(182, 3, 3);
+        margin-left: 10px;
+        align-self: center;
     }
     .revol h2{
         display: inline-block;
@@ -180,7 +187,7 @@
     }
 
     .wrap .video{
-        top: 100px;
+        top: 150px;
         opacity: 0;
         transition: 1s;
     }
@@ -188,32 +195,32 @@
         opacity: 1;
     }
     .wrap:nth-of-type(odd) .video{
-        right: 0px;
+        right: 50px;
     }
     .wrap:nth-of-type(odd):hover .video{
-        right: 100px;
+        right: 150px;
     }
     .wrap:nth-of-type(even) .video{
-        left: 30px;
+        left: 80px;
     }
     .wrap:nth-of-type(even):hover .video{
-        left: 130px;
+        left: 180px;
     }
 
     .wrap .revol{
-        top: 550px;
+        top: 600px;
         opacity: 0;
-        transition: 1s;
+        transition: 1s 0.3s;
     }
     .wrap:hover .revol{
-        top: 450px;
+        top: 500px;
         opacity: 1;
     }
     .wrap:nth-of-type(odd) .revol{
-        right: 300px;
+        right: 350px;
     }
     .wrap:nth-of-type(even) .revol{
-        right: 100px;
+        right: 150px;
     }
 
 </style>
@@ -239,6 +246,7 @@
             </div>
         </div>
         <div class="revol">
+            <p class="revol-title">因為我們做了這些革新 </p>
             <h2>低重心設計</h2>
             <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
             <h2>車體剛性強化</h2>
@@ -256,7 +264,7 @@
                 安全守護
             </div>
             <div class="title-content">
-                <h1>人人滿意的駕駛體驗</h1>
+                <h1>行車更安心的高剛性車體</h1>
                 <p>美好女士黑色很多人結合便利商店學者大大家裡你還，環保現實不懂任何人，部落格軟體我都休閒勞動日期，停止為主總經理增長外貿鄉民們，理解收藏，危。</p>
             </div>
         </div>
@@ -269,9 +277,10 @@
             </div>
         </div>
         <div class="revol">
-            <h2>低重心設計</h2>
+            <p class="revol-title">因為我們做了這些革新 </p>
+            <h2>主動安全</h2>
             <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
-            <h2>車體剛性強化</h2>
+            <h2>被動安全</h2>
             <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
         </div>
     </div>
@@ -284,7 +293,7 @@
                 乘坐舒適
             </div>
             <div class="title-content">
-                <h1>人人滿意的駕駛體驗</h1>
+                <h1>令人放鬆舒適的車室空間</h1>
                 <p>美好女士黑色很多人結合便利商店學者大大家裡你還，環保現實不懂任何人，部落格軟體我都休閒勞動日期，停止為主總經理增長外貿鄉民們，理解收藏，危。</p>
             </div>
         </div>
@@ -297,11 +306,12 @@
             </div>
         </div>
         <div class="revol">
-            <h2>低重心設計</h2>
+            <p class="revol-title">因為我們做了這些革新 </p>
+            <h2>駕駛位置最佳化</h2>
             <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
-            <h2>車體剛性強化</h2>
+            <h2>駕馭視野佳</h2>
             <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
-            <h2>四輪獨立懸吊</h2>
+            <h2>更寧靜的車室</h2>
             <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
         </div>
     </div>
@@ -314,7 +324,7 @@
                 以人為本
             </div>
             <div class="title-content">
-                <h1>人人滿意的駕駛體驗</h1>
+                <h1>使用者導向的貼心設計</h1>
                 <p>美好女士黑色很多人結合便利商店學者大大家裡你還，環保現實不懂任何人，部落格軟體我都休閒勞動日期，停止為主總經理增長外貿鄉民們，理解收藏，危。</p>
             </div>
         </div>
@@ -327,9 +337,10 @@
             </div>
         </div>
         <div class="revol">
-            <h2>低重心設計</h2>
+            <p class="revol-title">因為我們做了這些革新 </p>
+            <h2>優異油耗表現</h2>
             <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
-            <h2>車體剛性強化</h2>
+            <h2>行李箱空間最適化</h2>
             <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
         </div>
     </div>
@@ -342,7 +353,7 @@
                 引以為傲
             </div>
             <div class="title-content">
-                <h1>人人滿意的駕駛體驗</h1>
+                <h1>極具吸引力的精心設計</h1>
                 <p>美好女士黑色很多人結合便利商店學者大大家裡你還，環保現實不懂任何人，部落格軟體我都休閒勞動日期，停止為主總經理增長外貿鄉民們，理解收藏，危。</p>
             </div>
         </div>
@@ -355,9 +366,10 @@
             </div>
         </div>
         <div class="revol">
-            <h2>低重心設計</h2>
+            <p class="revol-title">因為我們做了這些革新 </p>
+            <h2>設計概念</h2>
             <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
-            <h2>車體剛性強化</h2>
+            <h2>環保概念</h2>
             <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
         </div>
     </div>
