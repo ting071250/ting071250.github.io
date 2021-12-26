@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    }
+    .wrap{
+        width: 1200px;
+        height: 900px;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        position: relative;
+    }
+
+    .base{
+        background-color: rgb(226, 226, 226);
+        position: relative;
+        z-index: 0;
+    }
+
+    .title{
+        width: 350px;
+        color: #fff;
+        position: relative;
+        z-index: 2;
+        align-content: center;
+    }
+    .title-show{
+        width: 350px;
+        background-color: rgb(182, 3, 3);
+        font-size: 32px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    .number{
+        font-size: 70px;
+        transform: rotate(90deg);
+        position: relative;
+        left: -10px;
+    }
+    .title-content{
+        width: 310px;
+        background-color: #000;
+        font-size: 16px;
+        padding: 20px;
+        line-height: 1.5;
+    }
+    .title h1{
+        font-size: 20px;
+    }
+
+    .video{
+        display: flex;
+        align-items: center;
+        position: absolute;
+        z-index: 1;
+    }
+    img{
+        width: 700px;
+        height: 100%;
+        vertical-align: top;
+    }
+    .play{
+        width: 60px;
+        height: 40px;
+        background-color: rgb(182, 3, 3);
+        display: flex;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+    }
+    .wrap:nth-of-type(odd) .play{
+        right: 50px;
+    }
+    .wrap:nth-of-type(even) .play{
+        right: 710px;
+    }
+    .triangle{
+        border-left: 20px solid #fff;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+    }
+    /* .video::after{
+        width: 50px;
+        height: 30px;
+        background-color: red;
+    } */
+
+    .revol{
+        width: 640px;
+        background-color: rgb(226, 226, 226);
+        position: absolute;
+        z-index: 2;
+        padding: 20px 30px;
+        font-size: 16px;
+    }
+    .revol::before{
+        content: "因為我們做了這些革新 ----------------------------------------------------------------------------------------";
+        display: block;
+        color: rgb(182, 3, 3);
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .revol h2{
+        display: inline-block;
+        background-color: #000;
+        font-size: 16px;
+        font-weight: normal;
+        padding: 5px;
+        color: #fff;
+        border-radius: 5%;
+    }
+    .revol li{
+        color: rgb(112, 111, 111);
+        text-indent: -6px;
+        padding: 10px;
+        line-height: 1.5;
+        font-size: 10px;
+    }
+    .revol li::before{
+        content: "• ";
+        color: rgb(182, 3, 3);
+    }
+
+    .wrap .base{
+        opacity: 0;
+        transition: 1s 0.3s;
+    }
+    .wrap:hover .base{
+        opacity: 1;
+    }
+    .wrap:nth-of-type(odd) .base{
+        width: 400px;
+        height: 250px;
+        top: 25px;
+        left: 575px;
+    }
+    .wrap:nth-of-type(odd):hover .base{
+        left: 475px;
+    }
+    .wrap:nth-of-type(even) .base{
+        width: 500px;
+        height: 350px;
+        top: -75px;
+        left: 250px;
+    }
+    .wrap:nth-of-type(even):hover .base{
+        top: 25px;
+    }
+
+    .wrap .title{
+        opacity: 0;
+        transition: 1s;
+    }
+    .wrap:hover .title{
+        opacity: 1;
+    }
+    .wrap:nth-of-type(odd) .title{
+        right: 600px;
+    }
+    .wrap:nth-of-type(odd):hover .title{
+        right: 500px;
+    }
+    .wrap:nth-of-type(even) .title{
+        right: -175px;
+    }
+    .wrap:nth-of-type(even):hover .title{
+        right: -75px;
+    }
+
+    .wrap .video{
+        top: 100px;
+        opacity: 0;
+        transition: 1s;
+    }
+    .wrap:hover .video{
+        opacity: 1;
+    }
+    .wrap:nth-of-type(odd) .video{
+        right: 0px;
+    }
+    .wrap:nth-of-type(odd):hover .video{
+        right: 100px;
+    }
+    .wrap:nth-of-type(even) .video{
+        left: 30px;
+    }
+    .wrap:nth-of-type(even):hover .video{
+        left: 130px;
+    }
+
+    .wrap .revol{
+        top: 550px;
+        opacity: 0;
+        transition: 1s;
+    }
+    .wrap:hover .revol{
+        top: 450px;
+        opacity: 1;
+    }
+    .wrap:nth-of-type(odd) .revol{
+        right: 300px;
+    }
+    .wrap:nth-of-type(even) .revol{
+        right: 100px;
+    }
+
+</style>
+<body>
+    <div class="wrap">
+        <div class="base"></div>
+        <div class="title">
+            <div class="title-show">
+                <p class="number">01</p>
+                操控樂趣
+            </div>
+            <div class="title-content">
+                <h1>人人滿意的駕駛體驗</h1>
+                <p>美好女士黑色很多人結合便利商店學者大大家裡你還，環保現實不懂任何人，部落格軟體我都休閒勞動日期，停止為主總經理增長外貿鄉民們，理解收藏，危。</p>
+            </div>
+        </div>
+        <div class="video">
+            <a href="#">
+                <img src="https://picsum.photos/600/350/?random=1">
+            </a>
+            <div class="play">
+                <div class="triangle"></div>
+            </div>
+        </div>
+        <div class="revol">
+            <h2>低重心設計</h2>
+            <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
+            <h2>車體剛性強化</h2>
+            <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
+            <h2>四輪獨立懸吊</h2>
+            <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
+        </div>
+    </div>
+
+    <div class="wrap">
+        <div class="base"></div>
+        <div class="title">
+            <div class="title-show">
+                <p class="number">02</p>
+                安全守護
+            </div>
+            <div class="title-content">
+                <h1>人人滿意的駕駛體驗</h1>
+                <p>美好女士黑色很多人結合便利商店學者大大家裡你還，環保現實不懂任何人，部落格軟體我都休閒勞動日期，停止為主總經理增長外貿鄉民們，理解收藏，危。</p>
+            </div>
+        </div>
+        <div class="video">
+            <a href="#">
+                <img src="https://picsum.photos/600/350/?random=2">
+            </a>
+            <div class="play">
+                <div class="triangle"></div>
+            </div>
+        </div>
+        <div class="revol">
+            <h2>低重心設計</h2>
+            <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
+            <h2>車體剛性強化</h2>
+            <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
+        </div>
+    </div>
+
+    <div class="wrap">
+        <div class="base"></div>
+        <div class="title">
+            <div class="title-show">
+                <p class="number">03</p>
+                乘坐舒適
+            </div>
+            <div class="title-content">
+                <h1>人人滿意的駕駛體驗</h1>
+                <p>美好女士黑色很多人結合便利商店學者大大家裡你還，環保現實不懂任何人，部落格軟體我都休閒勞動日期，停止為主總經理增長外貿鄉民們，理解收藏，危。</p>
+            </div>
+        </div>
+        <div class="video">
+            <a href="#">
+                <img src="https://picsum.photos/600/350/?random=3">
+            </a>
+            <div class="play">
+                <div class="triangle"></div>
+            </div>
+        </div>
+        <div class="revol">
+            <h2>低重心設計</h2>
+            <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
+            <h2>車體剛性強化</h2>
+            <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
+            <h2>四輪獨立懸吊</h2>
+            <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
+        </div>
+    </div>
+
+    <div class="wrap">
+        <div class="base"></div>
+        <div class="title">
+            <div class="title-show">
+                <p class="number">04</p>
+                以人為本
+            </div>
+            <div class="title-content">
+                <h1>人人滿意的駕駛體驗</h1>
+                <p>美好女士黑色很多人結合便利商店學者大大家裡你還，環保現實不懂任何人，部落格軟體我都休閒勞動日期，停止為主總經理增長外貿鄉民們，理解收藏，危。</p>
+            </div>
+        </div>
+        <div class="video">
+            <a href="#">
+                <img src="https://picsum.photos/600/350/?random=4">
+            </a>
+            <div class="play">
+                <div class="triangle"></div>
+            </div>
+        </div>
+        <div class="revol">
+            <h2>低重心設計</h2>
+            <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
+            <h2>車體剛性強化</h2>
+            <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
+        </div>
+    </div>
+
+    <div class="wrap">
+        <div class="base"></div>
+        <div class="title">
+            <div class="title-show">
+                <p class="number">05</p>
+                引以為傲
+            </div>
+            <div class="title-content">
+                <h1>人人滿意的駕駛體驗</h1>
+                <p>美好女士黑色很多人結合便利商店學者大大家裡你還，環保現實不懂任何人，部落格軟體我都休閒勞動日期，停止為主總經理增長外貿鄉民們，理解收藏，危。</p>
+            </div>
+        </div>
+        <div class="video">
+            <a href="#">
+                <img src="https://picsum.photos/600/350/?random=5">
+            </a>
+            <div class="play">
+                <div class="triangle"></div>
+            </div>
+        </div>
+        <div class="revol">
+            <h2>低重心設計</h2>
+            <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
+            <h2>車體剛性強化</h2>
+            <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
+        </div>
+    </div>
+</body>
+</html>
