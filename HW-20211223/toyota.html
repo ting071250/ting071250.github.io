@@ -12,7 +12,7 @@
     padding: 0;
     list-style: none;
     }
-    .wrap{
+    section{
         width: 1200px;
         height: 900px;
         margin: auto;
@@ -62,13 +62,14 @@
     }
 
     .video{
+        width: 700px;
         display: flex;
         align-items: center;
         position: absolute;
         z-index: 1;
     }
     img{
-        width: 700px;
+        width: 640px;
         height: 100%;
         vertical-align: top;
     }
@@ -81,22 +82,17 @@
         justify-content: center;
         align-items: center;
     }
-    .wrap:nth-of-type(odd) .play{
-        right: 50px;
+    section:nth-of-type(odd) .play{
+        /* right: 50px; */
     }
-    .wrap:nth-of-type(even) .play{
-        right: 710px;
+    section:nth-of-type(even) .play{
+        /* right: 710px; */
     }
     .triangle{
         border-left: 20px solid #fff;
         border-top: 10px solid transparent;
         border-bottom: 10px solid transparent;
     }
-    /* .video::after{
-        width: 50px;
-        height: 30px;
-        background-color: red;
-    } */
 
     .revol{
         width: 640px;
@@ -114,8 +110,9 @@
     }
     .revol-title::after{
         content: "";
-        width: 450px;
+        width: 20px;
         border-bottom: 2px solid rgb(182, 3, 3);
+        flex-grow: 1;
         margin-left: 10px;
         align-self: center;
     }
@@ -128,108 +125,108 @@
         color: #fff;
         border-radius: 5%;
     }
-    .revol li{
+    .revol p{
         color: rgb(112, 111, 111);
         text-indent: -6px;
         padding: 10px;
         line-height: 1.5;
         font-size: 10px;
     }
-    .revol li::before{
+    .revol p::before{
         content: "• ";
         color: rgb(182, 3, 3);
     }
 
-    .wrap .base{
+    section .base{
         opacity: 0;
         transition: 1s 0.3s;
     }
-    .wrap:hover .base{
+    section:hover .base{
         opacity: 1;
     }
-    .wrap:nth-of-type(odd) .base{
+    section:nth-of-type(odd) .base{
         width: 400px;
         height: 250px;
         top: 25px;
         left: 575px;
     }
-    .wrap:nth-of-type(odd):hover .base{
+    section:nth-of-type(odd):hover .base{
         left: 475px;
     }
-    .wrap:nth-of-type(even) .base{
+    section:nth-of-type(even) .base{
         width: 500px;
         height: 350px;
         top: -75px;
         left: 250px;
     }
-    .wrap:nth-of-type(even):hover .base{
+    section:nth-of-type(even):hover .base{
         top: 25px;
     }
 
-    .wrap .title{
+    section .title{
         opacity: 0;
         transition: 1s;
     }
-    .wrap:hover .title{
+    section:hover .title{
         opacity: 1;
     }
-    .wrap:nth-of-type(odd) .title{
+    section:nth-of-type(odd) .title{
         right: 600px;
     }
-    .wrap:nth-of-type(odd):hover .title{
+    section:nth-of-type(odd):hover .title{
         right: 500px;
     }
-    .wrap:nth-of-type(even) .title{
+    section:nth-of-type(even) .title{
         right: -175px;
     }
-    .wrap:nth-of-type(even):hover .title{
+    section:nth-of-type(even):hover .title{
         right: -75px;
     }
 
-    .wrap .video{
+    section .video{
         top: 150px;
         opacity: 0;
         transition: 1s;
     }
-    .wrap:hover .video{
+    section:hover .video{
         opacity: 1;
     }
-    .wrap:nth-of-type(odd) .video{
+    section:nth-of-type(odd) .video{
         right: 50px;
     }
-    .wrap:nth-of-type(odd):hover .video{
+    section:nth-of-type(odd):hover .video{
         right: 150px;
     }
-    .wrap:nth-of-type(even) .video{
+    section:nth-of-type(even) .video{
         left: 80px;
     }
-    .wrap:nth-of-type(even):hover .video{
+    section:nth-of-type(even):hover .video{
         left: 180px;
     }
 
-    .wrap .revol{
+    section .revol{
         top: 600px;
         opacity: 0;
         transition: 1s 0.3s;
     }
-    .wrap:hover .revol{
+    section:hover .revol{
         top: 500px;
         opacity: 1;
     }
-    .wrap:nth-of-type(odd) .revol{
+    section:nth-of-type(odd) .revol{
         right: 350px;
     }
-    .wrap:nth-of-type(even) .revol{
+    section:nth-of-type(even) .revol{
         right: 150px;
     }
 
 </style>
 <body>
-    <div class="wrap">
+    <section>
         <div class="base"></div>
         <div class="title">
             <div class="title-show">
-                <p class="number">01</p>
+                <span class="number">01</span>
                 操控樂趣
             </div>
             <div class="title-content">
@@ -240,27 +237,27 @@
         <div class="video">
             <a href="#">
                 <img src="https://picsum.photos/600/350/?random=1">
+                <div class="play">
+                    <div class="triangle"></div>
+                </div>
             </a>
-            <div class="play">
-                <div class="triangle"></div>
-            </div>
         </div>
         <div class="revol">
-            <p class="revol-title">因為我們做了這些革新 </p>
+            <span class="revol-title">因為我們做了這些革新 </span>
             <h2>低重心設計</h2>
-            <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
+            <p>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</p>
             <h2>車體剛性強化</h2>
-            <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
+            <p>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</p>
             <h2>四輪獨立懸吊</h2>
-            <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
+            <p>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</p>
         </div>
-    </div>
+    </section>
 
-    <div class="wrap">
+    <section>
         <div class="base"></div>
         <div class="title">
             <div class="title-show">
-                <p class="number">02</p>
+                <span class="number">02</span>
                 安全守護
             </div>
             <div class="title-content">
@@ -271,25 +268,25 @@
         <div class="video">
             <a href="#">
                 <img src="https://picsum.photos/600/350/?random=2">
+                <div class="play">
+                    <div class="triangle"></div>
+                </div>
             </a>
-            <div class="play">
-                <div class="triangle"></div>
-            </div>
         </div>
         <div class="revol">
-            <p class="revol-title">因為我們做了這些革新 </p>
+            <span class="revol-title">因為我們做了這些革新 </span>
             <h2>主動安全</h2>
-            <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
+            <p>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</p>
             <h2>被動安全</h2>
-            <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
+            <p>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</p>
         </div>
-    </div>
+    </section>
 
-    <div class="wrap">
+    <section>
         <div class="base"></div>
         <div class="title">
             <div class="title-show">
-                <p class="number">03</p>
+                <span class="number">03</span>
                 乘坐舒適
             </div>
             <div class="title-content">
@@ -300,27 +297,27 @@
         <div class="video">
             <a href="#">
                 <img src="https://picsum.photos/600/350/?random=3">
+                <div class="play">
+                    <div class="triangle"></div>
+                </div>
             </a>
-            <div class="play">
-                <div class="triangle"></div>
-            </div>
         </div>
         <div class="revol">
-            <p class="revol-title">因為我們做了這些革新 </p>
+            <span class="revol-title">因為我們做了這些革新 </span>
             <h2>駕駛位置最佳化</h2>
-            <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
+            <p>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</p>
             <h2>駕馭視野佳</h2>
-            <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
+            <p>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</p>
             <h2>更寧靜的車室</h2>
-            <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
+            <p>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</p>
         </div>
-    </div>
+    </section>
 
-    <div class="wrap">
+    <section>
         <div class="base"></div>
         <div class="title">
             <div class="title-show">
-                <p class="number">04</p>
+                <span class="number">04</span>
                 以人為本
             </div>
             <div class="title-content">
@@ -331,25 +328,25 @@
         <div class="video">
             <a href="#">
                 <img src="https://picsum.photos/600/350/?random=4">
+                <div class="play">
+                    <div class="triangle"></div>
+                </div>
             </a>
-            <div class="play">
-                <div class="triangle"></div>
-            </div>
         </div>
         <div class="revol">
-            <p class="revol-title">因為我們做了這些革新 </p>
+            <span class="revol-title">因為我們做了這些革新 </span>
             <h2>優異油耗表現</h2>
-            <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
+            <p>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</p>
             <h2>行李箱空間最適化</h2>
-            <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
+            <p>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</p>
         </div>
-    </div>
+    </section>
 
-    <div class="wrap">
+    <section>
         <div class="base"></div>
         <div class="title">
             <div class="title-show">
-                <p class="number">05</p>
+                <span class="number">05</span>
                 引以為傲
             </div>
             <div class="title-content">
@@ -360,18 +357,18 @@
         <div class="video">
             <a href="#">
                 <img src="https://picsum.photos/600/350/?random=5">
+                <div class="play">
+                    <div class="triangle"></div>
+                </div>
             </a>
-            <div class="play">
-                <div class="triangle"></div>
-            </div>
         </div>
         <div class="revol">
-            <p class="revol-title">因為我們做了這些革新 </p>
+            <span class="revol-title">因為我們做了這些革新 </span>
             <h2>設計概念</h2>
-            <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
+            <p>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</p>
             <h2>環保概念</h2>
-            <li>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</li>
+            <p>進來本次同意每個失望大聲至少標誌，大哥鑒定投訴實力多次，事故什麼事看著已有你自己朋友說道查看雙方環節感覺那麼，業主藍色，小姐好了還會內容演。</p>
         </div>
-    </div>
+    </section>
 </body>
 </html>
