@@ -1,0 +1,239 @@
+h1{
+    position: fixed;
+    z-index: 0;
+    opacity: 0;
+}
+
+a, p, span, h2, h3, button{
+    line-height: 1.5;
+    text-decoration: none;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+.row{
+    align-items: center;
+}
+
+header{
+    width: 100%;
+    position: fixed;
+    padding: 20px 0px;
+    background-color: white;
+    border-bottom: 1px solid gray;
+    top: 0px;
+    z-index: 3;
+}
+
+.logo{
+    margin-right: auto;
+}
+
+section{
+    margin-bottom: 50px;
+}
+.preamble, .service, .question{
+    margin-bottom: 30px;
+}
+
+.main{
+    margin-top: 150px;
+    .preamble .row:nth-child(even){
+        flex-direction: row-reverse;
+    }
+}
+
+img{
+    width: 100%;
+    vertical-align: top;
+}
+
+.content{
+    padding: 0px 50px;
+}
+
+.loud, h2{
+    font-size: 42px;
+    margin: 50px 0px;
+}
+
+h3{
+    font-size: 30px;
+}
+
+.btn-row{
+    display: flex;
+    align-items: center;
+}
+
+.colored, .colored-reverse, .colored-special{
+    height: 36px;
+    display: inline-block;
+    padding: 10px 20px 0px;
+    text-decoration: none;
+    transition: 0.5s;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+.colored{
+    color: #fff;
+    background-color: #1fde82;
+    border: 1px solid #1fde82;
+    &:hover{
+        background-color: slategrey;
+        border: 1px solid slategrey;
+    }
+}
+.colored-reverse{
+    border: 1px solid slategrey;
+    color: slategrey;
+    &:hover{
+        color: #fff;
+        background-color: #1fde82;
+        border: 1px solid #1fde82;
+    }
+}
+
+.colored-special{
+    border: 1px solid white;
+    color: white;
+    &:hover{
+        background-color: #1fde82;
+        border: 1px solid #1fde82;
+    }
+}
+
+.service-content{
+    border-radius: 2%;
+    background-color: rgb(233, 230, 230);
+}
+
+.service-item{
+    min-height: 300px;
+    background-color: #fff;
+    border-radius: 5%;
+    position: relative;
+    padding: 20px 20px 60px;
+}
+
+.icon-round{
+    width: 75px;
+}
+
+.readmore{
+    color: slategrey;
+    transition: 0.3s;
+    position: absolute;
+    bottom: 30px;
+    &:hover{
+        color: #1fde82;
+    }
+}
+
+.advantage{
+    background-color: #2570ff;
+    color: #fff;
+}
+
+.data-item{
+    background-color: #3f81ff;
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+    border-radius: 5%;
+    .num, p{
+        margin: auto;
+    }
+    .num{
+        font-size: 36px;
+        margin-bottom: 30px;
+    }
+}
+
+.step{
+    .step-row{
+        margin-bottom: 30px;
+    }
+}
+
+.project .row a{
+    margin-left: 20px;
+}
+
+.project-item{
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+    .show{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        right: 0px;
+        left: 0px;
+        padding-left: 20px;
+        margin: auto;
+        opacity: 0;
+        font-size: 20px;
+    }
+    &:hover{
+        .show{
+            background-color: #1fde82;
+            opacity: 1;
+            transition: 0.5s;
+        }
+    }
+}
+
+@media screen and (min-width: 786px) {
+    .data-item{
+        min-height: 150px;
+    }
+    .step{
+        .step-row{
+            &:nth-of-type(odd){
+                flex-direction: row-reverse;
+                justify-content: left;
+            }
+        }
+    }
+    .project h2{
+        margin-right: auto;
+    }
+    .project-item{
+        height: auto;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .loud, h2{
+        font-size: 60px;
+    }
+    .advantage .data-item{
+        text-align: left;
+        .num{
+            font-size: 54px;
+        }
+    }
+    .step{
+        .step-row{
+            &:nth-of-type(odd){
+                .step-content:nth-child(1){
+                    margin-left: 8.333333%;
+                }
+            }
+            &:nth-of-type(1){
+                .step-content:nth-child(1){
+                    margin-right: 8.333333%;
+                }
+            }
+            &:nth-of-type(even){
+                .step-content:nth-child(1){
+                    margin-left: 16.666666%;
+                }
+            }
+        }
+    }
+}
