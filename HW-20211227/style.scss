@@ -1,24 +1,30 @@
 h1{
     position: fixed;
-    z-index: 0;
-    opacity: 0;
+    // z-index: -1;
+    top: -20px;
+    left: -20px;
 }
 
-a, p, span, h2, h3, button{
+a, p, h2{
     line-height: 1.5;
     text-decoration: none;
-    margin-right: 20px;
-    margin-top: 10px;
+}
+
+button{
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .row{
     align-items: center;
 }
 
+.main button{
+    margin-top: 20px;
+}
+
 header{
     width: 100%;
     position: fixed;
-    padding: 20px 0px;
     background-color: white;
     border-bottom: 1px solid gray;
     top: 0px;
@@ -26,7 +32,12 @@ header{
 }
 
 .logo{
-    margin-right: auto;
+    margin: 20px auto 20px 10px ;
+}
+
+#menu-control{
+    position: fixed;
+    top: -20px;
 }
 
 section{
@@ -43,6 +54,11 @@ section{
     }
 }
 
+.main a{
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
 img{
     width: 100%;
     vertical-align: top;
@@ -53,27 +69,22 @@ img{
 }
 
 .loud, h2{
-    font-size: 42px;
+    font-size: 36px;
     margin: 50px 0px;
 }
 
-h3{
+h3, .title{
     font-size: 30px;
+    margin-bottom: 20px;
 }
 
-.btn-row{
-    display: flex;
-    align-items: center;
-}
-
-.colored, .colored-reverse, .colored-special{
+.colored, .colored-reverse, .colored-advantage{
+    font-size: 16px;
     height: 36px;
     display: inline-block;
     padding: 10px 20px 0px;
     text-decoration: none;
     transition: 0.5s;
-    margin-right: 20px;
-    margin-top: 20px;
 }
 .colored{
     color: #fff;
@@ -94,37 +105,52 @@ h3{
     }
 }
 
-.colored-special{
+.subscribe-btn{
+    height: 48px;
+    padding-bottom: 10px;
+}
+
+.colored-advantage{
     border: 1px solid white;
     color: white;
+    margin-top: 20px;
     &:hover{
         background-color: #1fde82;
         border: 1px solid #1fde82;
     }
 }
 
-.service-content{
+.service-content.row{
     border-radius: 2%;
     background-color: rgb(233, 230, 230);
+    align-items: flex-start;
 }
 
+// .col-12.col-md-4{
+//     height: 100%;
+//     margin-bottom: 0px;
+// }
+
 .service-item{
-    min-height: 300px;
+    // min-height: 300px;
     background-color: #fff;
     border-radius: 5%;
     position: relative;
-    padding: 20px 20px 60px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .icon-round{
     width: 75px;
+    margin-bottom: 20px;
 }
 
 .readmore{
     color: slategrey;
     transition: 0.3s;
-    position: absolute;
-    bottom: 30px;
+    display: block;
+    // margin-top: auto;
     &:hover{
         color: #1fde82;
     }
@@ -141,12 +167,10 @@ h3{
     color: #fff;
     text-align: center;
     border-radius: 5%;
-    .num, p{
-        margin: auto;
-    }
     .num{
         font-size: 36px;
         margin-bottom: 30px;
+        
     }
 }
 
@@ -154,10 +178,6 @@ h3{
     .step-row{
         margin-bottom: 30px;
     }
-}
-
-.project .row a{
-    margin-left: 20px;
 }
 
 .project-item{
@@ -187,7 +207,134 @@ h3{
     }
 }
 
-@media screen and (min-width: 786px) {
+.viewsite{
+    margin-right: auto;
+}
+
+.signup-title{
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.signup-input input, textarea{
+    width: 100%;
+    font-size: 22px;
+    margin-bottom: 20px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.subscribe-container{
+    max-width: 900px;
+    padding: 0px 20px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.email-row{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+}
+
+[type="email"]{
+    flex-grow: 1;
+    font-size: 26px;
+}
+
+.send-btn{
+    padding-bottom: 10px;
+}
+
+footer .row{
+    align-items: flex-start;
+}
+
+.footer-content{
+    display: flex;
+    flex-direction: column;
+    .title{
+        font-size: 22px;
+    }
+    .logo{
+        margin-top: -15px;
+        margin-left: -10px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .menu{
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        height: 100%;
+        width: 30%;
+        background-color: #ffe;
+        right: -100%;
+        padding-top: 100px;
+        padding-left: 20px;
+        transition: .3s;
+        a{
+            margin-bottom: 20px;
+            &:hover{
+                border-bottom: 1px solid gray;
+            }
+        }
+        .subscribe-btn{
+            display: none;
+        }
+    }
+    .ham{
+        width: 50px;
+        height: 50px;
+        background-color: #1fde82;
+        transition: .3s;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        span{
+            width: 80%;
+            height: 6px;
+            background-color: #fff;
+            display: block;
+            left: 0;
+            right: 0;
+            margin: auto;
+            position: absolute;
+        }
+    }
+    
+    .ham span:first-child{
+        top: 10px;
+    }
+    .ham span:nth-child(2){
+        top: 0px;
+        bottom: 0px;
+    }
+    .ham span:last-child{
+        top: auto;
+        bottom: 10px;
+    }
+    #menu-control:checked+.menu{
+        right: 0px;
+        top: 0px;
+        transition: .3s;
+    }
+    #menu-control:checked~.ham{
+        background-color: #ffa;
+        transition: .3s;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .menu{
+        margin-top: 20px 0px;
+        a{
+            margin-right: 15px;
+        }
+    }
     .data-item{
         min-height: 150px;
     }
@@ -202,6 +349,9 @@ h3{
     .project h2{
         margin-right: auto;
     }
+    .project .colored{
+        margin-left: auto;
+    }
     .project-item{
         height: auto;
     }
@@ -209,7 +359,7 @@ h3{
 
 @media screen and (min-width: 1024px) {
     .loud, h2{
-        font-size: 60px;
+        font-size: 56px;
     }
     .advantage .data-item{
         text-align: left;

@@ -6,7 +6,8 @@
 /* 固定寬、畫面置中容器 */
 .container{
     max-width: 1200px;
-    margin: auto;
+    margin-right: auto;
+    margin-left: auto;
     /* padding-left: var(--col-gap);
     padding-right: var(--col-gap); */
 }
@@ -39,7 +40,7 @@
 .col-11{ width: 91.666666%}
 .col-12{ width: 100%}
 
-@media screen and (min-width: 786px) {
+@media screen and (min-width: 768px) {
     .col-md-1{ width: 8.333333%}
     .col-md-2{ width: 16.666666%}
     .col-md-3{ width: 25%}
@@ -103,7 +104,7 @@
     width: 16.666666%;
 }
 
-@media screen and (min-width: 786px) {
+@media screen and (min-width: 768px) {
     .row-cols-md-1 > .col{
         width: 100%;
     }

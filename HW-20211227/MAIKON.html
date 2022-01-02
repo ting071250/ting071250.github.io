@@ -11,19 +11,28 @@
 </head>
 <body>
     <header>
-        <h1>MAIKON</h1>
+        
         <div class="container">
+            <h1>MAIKON</h1>
             <nav class="row">
                 <a href="" class="logo">
                     <img src="pic/logo.png" alt="logo">
                 </a>
-                <a href="">Home</a>
-                <a href="">About</a>
-                <a href="">Service</a>
-                <a href="">Team</a>
-                <a href="">Case studio</a>
-                <a href="">Contacts</a>
-                <button>SUBSCRIBE</button>
+                <input type="checkbox" name="" id="menu-control">
+                <div class="menu">
+                    <a href="">Home</a>
+                    <a href="">About</a>
+                    <a href="">Service</a>
+                    <a href="">Team</a>
+                    <a href="">Case studio</a>
+                    <a href="">Contacts</a>
+                    <button class="subscribe-btn colored-reverse">SUBSCRIBE</button>
+                </div>
+                <label for="menu-control" class="ham">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
             </nav>
         </div>
     </header>
@@ -34,7 +43,7 @@
                 <div class="col-12 col-md-7">
                     <p class="loud">Our creativity is your success</p>
                     <p>We break all boundaries if they happen on our way of project’s development!</p>
-                    <div class="btn-row">
+                    <div class="row">
                         <a href="#" class="colored">LEARN MORE</a>
                         <button>
                             <img src="pic/play-button.svg" alt="">
@@ -49,7 +58,7 @@
                 <div class="col-12 col-md-7">
                     <p class="loud">Creative challenges are our passion</p>
                     <p>Our team of designers and developers work closely together to build a creative and positive working environment. Functionality is as important to us as aesthetics.</p>
-                    <div class="btn-row">
+                    <div class="row">
                         <a href="#" class="colored">ABOUT US</a>
                         <a href="#" class="colored-reverse">CONTACT US</a>
                     </div>
@@ -131,9 +140,9 @@
                 <div class="col-12 col-md-7">
                     <p class="loud">If you have any questions, please contact us</p>
                     <p>Our professional support team try to do their best to provide you with high-quality consultations concerning any question about our services.</p>
-                    <div class="btn-row">
+                    <div class="row">
                         <a class="colored">CONTACT US</a>
-                        <button class="colored-reverse">SUBSCRIBE</button>
+                        <button class="colored-reverse subscribe-btn">SUBSCRIBE</button>
                     </div>
                 </div>
                 <div class="pic col-12 col-md-5">
@@ -177,7 +186,7 @@
                 <div class="col-12 col-md-6">
                     <h2>Why choose our studio for your projects?</h2>
                     <p>We are a command of professional and enthusiastic people, who like what they do and are always in the process of growing and improving their skills.</p>
-                    <a href="" class="colored-special">ORDER SERVICE</a>
+                    <a href="" class="colored-advantage">ORDER SERVICE</a>
                 </div>
             </div>
         </div>
@@ -260,8 +269,12 @@
 
     <section class="project container">
         <div class="row">
-            <h2 class="col-12 col-md-7 col-lg-6">Our team's work with Projects</h2>
-            <a href="" class="colored">ALL PROJECTS</a>
+            <div class="col-12 col-md-6">
+                <h2>Our team's work with Projects</h2>
+            </div>
+            <div class="row col-12 col-md-6">
+                <a href="" class="colored">ALL PROJECTS</a>
+            </div>
         </div>
         <div class="row">
             <div class="col-12 col-md-4">
@@ -269,7 +282,7 @@
                     <img src="pic/project-1.webp" alt="">
                     <div class="show">
                         <p>Minimal Creative "Impuls"</p>
-                        <a href="">VIEW SITE</a>
+                        <a href="" class="viewsite">VIEW SITE</a>
                     </div>
                 </div>
             </div>
@@ -278,7 +291,7 @@
                     <img src="pic/project-2.webp" alt="">
                     <div class="show">
                         <p>Travel Company "Tour Up"</p>
-                        <a href="">VIEW SITE</a>
+                        <a href="" class="viewsite">VIEW SITE</a>
                     </div>
                 </div>
             </div>
@@ -287,11 +300,78 @@
                     <img src="pic/project-3.webp" alt="">
                     <div class="show">
                         <p>Restaurant Pizza "Little Italy"</p>
-                        <a href="">VIEW SITE</a>
+                        <a href="" class="viewsite">VIEW SITE</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <section class="signup container">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="pic">
+                    <img src="pic/home-image-9.svg" alt="">
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="signup-input row">
+                    <span class="title">Sign up for our consultation</span>
+                    <input type="text" placeholder="Name">
+                    <input type="email" placeholder="Email">
+                    <textarea type="textarea" placeholder="Message" rows="3"></textarea>
+                    <button class="colored send-btn">SEND</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="subscribe-container">
+            <span class="title">Subscribe to our news and learn more</span>
+            <div class="email-row">
+                <input type="email">
+                <button class="colored send-btn">SEND</button>
+            </div>
+    </section>
+
+    <footer class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="footer-content">
+                    <a href="" class="logo">
+                        <img src="pic/logo.png" alt="logo">
+                    </a>
+                    <a><span>Phone: </span>+1(045)-224-12-67</a>
+                    <a><span>Mail: </span>info@demolink.org
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="footer-content">
+                    <span class="title">Services</span>
+                    <a href="">Web design</a>
+                    <a href="">Web development</a>
+                    <a href="">Full Optimization</a>
+                    <a href="">Research</a>
+                    <a href="">Management</a>
+                    <a href="">Free support</a>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="footer-content">
+                    <span class="title">About Company</span>
+                    <a href="">Abot us</a>
+                    <a href="">Team</a>
+                    <a href="">Case studio</a>
+                    <a href="">Contacts</a>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="footer-content">
+                    <span class="title">Our Social Networks</span>
+                    <span>Join us in the social networks and keep up on the latest news.</span>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
