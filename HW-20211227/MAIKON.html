@@ -8,16 +8,17 @@
     <link rel="stylesheet" href="../reset.css">
     <link rel="stylesheet" href="../grid.css">
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 </head>
 <body>
     <header>
-        
         <div class="container">
-            <h1>MAIKON</h1>
             <nav class="row">
-                <a href="" class="logo">
-                    <img src="pic/logo.png" alt="logo">
-                </a>
+                <h1>
+                    <a href="#" class="logo">
+                        <img src="pic/logo.png" alt="MAIKON">
+                    </a>
+                </h1>   
                 <input type="checkbox" name="" id="menu-control">
                 <div class="menu">
                     <a href="">Home</a>
@@ -26,7 +27,7 @@
                     <a href="">Team</a>
                     <a href="">Case studio</a>
                     <a href="">Contacts</a>
-                    <button class="subscribe-btn colored-reverse">SUBSCRIBE</button>
+                    <a href="#subscribe-area" class="colored-reverse">SUBSCRIBE</a>
                 </div>
                 <label for="menu-control" class="ham">
                     <span></span>
@@ -45,8 +46,9 @@
                     <p>We break all boundaries if they happen on our way of project’s development!</p>
                     <div class="row">
                         <a href="#" class="colored">LEARN MORE</a>
-                        <button>
-                            <img src="pic/play-button.svg" alt="">
+                        <button class="play">
+                            <span>watch video</span>
+                            <i class="far fa-play-circle"></i>
                         </button>
                     </div>
                 </div>
@@ -142,7 +144,7 @@
                     <p>Our professional support team try to do their best to provide you with high-quality consultations concerning any question about our services.</p>
                     <div class="row">
                         <a class="colored">CONTACT US</a>
-                        <button class="colored-reverse subscribe-btn">SUBSCRIBE</button>
+                        <a href="#subscribe-area" class="colored-reverse">SUBSCRIBE</a>
                     </div>
                 </div>
                 <div class="pic col-12 col-md-5">
@@ -320,16 +322,16 @@
                     <input type="text" placeholder="Name">
                     <input type="email" placeholder="Email">
                     <textarea type="textarea" placeholder="Message" rows="3"></textarea>
-                    <button class="colored send-btn">SEND</button>
+                    <button class="colored send-btn">send</button>
                 </div>
             </div>
         </div>
     </section>
-    <section class="subscribe-container">
+    <section id="subscribe-area" class="subscribe-container">
             <span class="title">Subscribe to our news and learn more</span>
             <div class="email-row">
                 <input type="email">
-                <button class="colored send-btn">SEND</button>
+                <button class="colored send-btn">send</button>
             </div>
     </section>
 
@@ -337,12 +339,19 @@
         <div class="row">
             <div class="col-12 col-md-6 col-lg-3">
                 <div class="footer-content">
-                    <a href="" class="logo">
-                        <img src="pic/logo.png" alt="logo">
+                    <a href="#" class="logo">
+                        <img src="pic/logo.png" alt="MAIKON">
                     </a>
-                    <a><span>Phone: </span>+1(045)-224-12-67</a>
-                    <a><span>Mail: </span>info@demolink.org
-                    </a>
+                    <ul>
+                        <li>
+                            <span>Phone: </span>
+                            <a href="tel:+1(045)-224-12-67">+1(045)-224-12-67</a>
+                        </li>
+                        <li>
+                            <span>Mail: </span>
+                            <a href="mailto:info@demolink.org">info@demolink.org</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-3">
@@ -370,8 +379,25 @@
                     <span class="title">Our Social Networks</span>
                     <span>Join us in the social networks and keep up on the latest news.</span>
                 </div>
+                <ul class="media-icon">
+                    <li>
+                        <a href=""><i class="fab fa-youtube"></i></a>                  
+                    </li>
+                    <li>
+                        <a href=""><i class="fab fa-facebook-f"></i></a>
+                    </li>
+                    <li>
+                        <a href=""><i class="fab fa-instagram"></i></a>
+                    </li>
+                    <li>
+                        <a href=""><i class="fab fa-twitter"></i></a>                  
+                    </li>
+                </ul>
             </div>
         </div>
     </footer>
+    <div class="go-back">
+        <a href="#"><i class="fas fa-angle-up"></i></a>
+    </div>
 </body>
 </html>
