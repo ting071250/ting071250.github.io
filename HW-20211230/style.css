@@ -107,7 +107,7 @@ a, ul, li {
   font-size: 36px;
 }
 
-.project-show {
+.project-text {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -133,7 +133,7 @@ a, ul, li {
   overflow: hidden;
 }
 
-.project-item:hover .show {
+.project-item:hover .project-text {
   background-color: #1fde82;
   opacity: 1;
   -webkit-transition: 0.5s;

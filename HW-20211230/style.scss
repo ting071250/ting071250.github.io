@@ -95,7 +95,7 @@ a, ul, li{
     }
 }
 
-.project-show{
+.project-text{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -114,7 +114,7 @@ a, ul, li{
     height: 300px;
     overflow: hidden;
     &:hover{
-        .show{
+        .project-text{
             background-color: $main-color;
             opacity: 1;
             transition: 0.5s;
