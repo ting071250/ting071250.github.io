@@ -1,6 +1,10 @@
 $main-color: #1fde82;
 $main-color-reverse: slategrey;
 
+html{
+    scroll-behavior: smooth;
+}
+
 a, ul, li{
     padding: 0px;
     margin: 0px;
