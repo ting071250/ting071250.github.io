@@ -88,8 +88,12 @@
                 pathFile = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${fileName}.png`;
 
                 let img = document.createElement("img");
-                img.setAttribute("src", pathFile);
-
+                // img.setAttribute("src", pathFile);
+                img.src = pathFile;
+                img.addEventListener('click', function(event){
+                    container.removeChild(event.target);
+                });
+                    
                 container.appendChild(img);
             }
             currentIndex = numberOfAllPokemon;
@@ -114,7 +118,10 @@
                     let imgToBeAdded = document.createElement("img");
                     let fileName = currentIndex.toString().padStart(3, 0);
                     let pathFile = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${fileName}.png`;
-                    imgToBeAdded.setAttribute('src', pathFile);
+                    imgToBeAdded.src = pathFile;
+                    imgToBeAdded.addEventListener('click', function(event){
+                        container.removeChild(event.target);
+                    });
                     
                     container.appendChild(imgToBeAdded);
                 }
