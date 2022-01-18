@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../reset.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        button {
+            background-color: transparent;
+            border: none;
+        }
+
+        .outframe {
+            width: 960px;
+        }
+
+        .selection {
+            width: 100%;
+            height: 100px;
+            font-size: 12px;
+            border: 1px #ccc solid;
+            border-radius: 10px;
+            background-color: #fff;
+            padding: 10px;
+            margin: 10px 0px;
+        }
+
+        .selection:hover {
+            border: 1px gray solid;
+        }
+
+        .color-show {
+            width: 25px;
+            height: 25px;
+            display: block;
+            margin: 10px auto;
+            background-color: #f00;
+        }
+
+        .color-gray {
+            background-color: #b1b4b6;
+        }
+
+        .color-silver {
+            background-color: #dfe1e0;
+        }
+
+        .color-green {
+            background-color: #cbdcc9;
+        }
+
+        .color-rose {
+            background-color: #ebcac3;
+        }
+
+        .color-skyblue {
+            background-color: #cbdae6;
+        }
+
+        .inform {
+            font-size: 12px;
+            text-align: left;
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            background-color: #aaa;
+            padding: 20px 10px;
+        }
+
+        .storage-show {
+            font-size: 24px;
+        }
+
+        .connection-show {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .price{
+            width: 100%;
+            background-color: rgb(231, 231, 231);
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .show-top{
+            font-size: 20px;
+            font-weight: bold;
+            position: sticky;
+            top: 0px;
+            z-index: 2;
+        }
+        #showImg{
+            position: sticky;
+            top: 85px;
+        }
+        h2{
+            font-size: 20px;
+        }
+        .dropdown-toggle::after {
+            content: none;
+        }
+        #selected-color, #selected-storage, #selected-network{
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="outframe m-auto d-flex">
+            <a class="navbar-brand" href="#">
+                <i class="fab fa-apple"></i>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul class="navbar-nav mb-2 mb-lg-0 w-100 justify-content-lg-between">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">商店</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Mac</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">iPad</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">iPhone</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Watch</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">AirPods</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">TV和家庭</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Apple獨家</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">配件</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">支援服務</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="h-100 nav-link">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle nav-link" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-shopping-bag"></i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="show-top border-bottom bg-white">
+        <div class="outframe m-auto">
+            <div class="d-flex justify-content-between p-2">
+                <span>iPad Air</span>
+                <span class="showPrice">NT$18,900起</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="outframe m-auto mt-5">
+        <div class="row w-100">
+            <div class="col imgArea w-50">
+                <img src="https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/ipad-air-select-202009?wid=443&hei=535&fmt=jpeg&qlt=95&.v=1599066777000"
+                    alt="all iPads" id="showImg">
+            </div>
+            <div class="col mainArea w-50">
+                <h1 class="ms-4 font-weight-bold">購買iPad Air</h1>
+                <div class="outfit p-5">
+                    <h2 class="outfit-title">外觀</h2>
+                    <span id="selected-color"></span>
+                    <div class="colors-wrap row row-cols-2">
+                        <div class="color-btn">
+                            <button class="col selection rounded-4" id="btn-gray">
+                                <span class="color-show rounded-circle color-gray"></span>
+                                <p>太空灰</p>
+                            </button>
+                        </div>
+                        <div class="color-btn">
+                            <button class="col selection rounded-4" id="btn-silver">
+                                <span class="color-show rounded-circle color-silver"></span>
+                                <p>銀色</p>
+                            </button>
+                        </div>
+                        <div class="color-btn">
+                            <button class="col selection rounded-4" id="btn-green">
+                                <span class="color-show rounded-circle color-green"></span>
+                                <p>綠色</p>
+                            </button>
+                        </div>
+                        <div class="color-btn">
+                            <button class="col selection rounded-4" id="btn-rose">
+                                <span class="color-show rounded-circle color-rose"></span>
+                                <p>玫瑰金色</p>
+                            </button>
+                        </div>
+                        <div class="color-btn">
+                            <button class="col selection rounded-4" id="btn-skyblue">
+                                <span class="color-show rounded-circle color-skyblue"></span>
+                                <p>天藍色</p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="storage p-5">
+                    <h2 class="storage-title">儲存裝置</h2>
+                    <span id="selected-storage"></span>
+                    <button class="inform"> <strong>提前為日後預留空間。</strong> 反對你有大哥地圖力量公里集中僅供，屏幕我去少年女孩子，計算。 </button>
+                    <div class="storage-wrap row row-cols-2">
+                        <div class="storage-btn">
+                            <button class="col selection rounded-4" id="btn-64">
+                                <p class="storage-show">64GB</p>
+                                <p>NT$18,900起</p>
+                            </button>
+                        </div>
+                        <div class="storage-btn">
+                            <button class="col selection rounded-4" id="btn-256">
+                                <p class="storage-show">256GB</p>
+                                <p>NT$23,900起</p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="network p-5">
+                    <h2 class="network-title">連線能力</h2>
+                    <span id="selected-network"></span>
+                    <button class="inform"> <strong>兩種快速的方式，讓你時時保持聯繫。</strong> 反對你有大哥地圖力量公里集中僅供，屏幕我去少年女孩子，計算。 </button>
+                    <div class="network-wrap row row-cols-2">
+                        <div class="network-btn">
+                            <button class="col selection rounded-4" id="btn-WiFi">
+                                <p class="connection-show">Wi-Fi</p>
+                                <p>NT$18,900起</p>
+                            </button>
+                        </div>
+                        <div class="network-btn">
+                            <button class="col selection rounded-4" id="btn-Cellular">
+                                <p class="connection-show">Wi-Fi + 行動網路</p>
+                                <p>NT$23,200起</p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="price p-5">
+
+                    <p class="showPrice">NT$18,900起</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+
+
+
+    <script>
+        let btnGray, btnSilver, btnGreen, btnRose, btnBlue, btn64, btn256, btnWiFi, btnCellular
+        let showImg, showPrice
+        let grayObj, silverObj, greenObj, roseObj, blueObj
+        let selectedColorText, selectedStorageText, selectedNetworkText
+        let selectedColor = '', selectedStorage = '', selectedNetwork = ''
+        let ipadArray, selectedIpad
+
+        let xhr = new XMLHttpRequest()
+
+        xhr.open('GET', 'https://raw.githubusercontent.com/ting071250/FileStorage/main/hw-ipadAir_array')
+        xhr.responseType = 'json'
+
+        xhr.onload = function () {
+            ipadArray = this.response
+            grayObj = this.response.find(x => x.color == '太空灰色')
+            silverObj = this.response.find(x => x.color == '銀色')
+            greenObj = this.response.find(x => x.color == '綠色')
+            roseObj = this.response.find(x => x.color == '玫瑰金色')
+            blueObj = this.response.find(x => x.color == '天藍色')
+        }
+
+        xhr.send()
+
+    </script>
+
+    <script type="module">
+        import { $gg as getTarget } from './Helpers.js'
+
+        btnGray = getTarget('#btn-gray')
+        btnSilver = getTarget('#btn-silver')
+        btnGreen = getTarget('#btn-green')
+        btnRose = getTarget('#btn-rose')
+        btnBlue = getTarget('#btn-skyblue')
+        btn64 = getTarget('#btn-64')
+        btn256 = getTarget('#btn-256')
+        btnWiFi = getTarget('#btn-WiFi')
+        btnCellular = getTarget('#btn-Cellular')
+        showImg = getTarget('#showImg')
+        showPrice = getTarget('.showPrice')
+        selectedColorText = getTarget('#selected-color')
+        selectedStorageText = getTarget('#selected-storage')
+        selectedNetworkText = getTarget('#selected-network')
+
+        btnGray.addEventListener('click', function () { ChageImg(grayObj) })
+        btnSilver.addEventListener('click', function () { ChageImg(silverObj) })
+        btnGreen.addEventListener('click', function () { ChageImg(greenObj) })
+        btnRose.addEventListener('click', function () { ChageImg(roseObj) })
+        btnBlue.addEventListener('click', function () { ChageImg(blueObj) })
+
+        function ChageImg(colorObj) {
+            showImg.src = `pic/${colorObj.picture}`
+            selectedColorText.innerText = `${colorObj.color}`
+            selectedColor = colorObj.color
+            decideIpad()
+        }
+
+        btn64.addEventListener('click', function () {
+            selectedStorageText.innerText = '64GB'
+            selectedStorage = '64GB'
+            decideIpad()
+        })
+        btn256.addEventListener('click', function () { 
+            selectedStorageText.innerText = '256GB' 
+            selectedStorage = '256GB'
+            decideIpad()
+        })
+        btnWiFi.addEventListener('click', function () { 
+            selectedNetworkText.innerText = 'WiFi' 
+            selectedNetwork = 'Wi-Fi'
+            decideIpad()
+        })
+        btnCellular.addEventListener('click', function () { 
+            selectedNetworkText.innerText = 'WiFi + 行動網路' 
+            selectedNetwork = 'Cellular'
+            decideIpad()
+        })
+        
+        function decideIpad(){
+            if (selectedColor == '' || selectedStorage == '' || selectedNetwork == ''){
+                return
+            }
+            else{
+                selectedIpad = ipadArray.find(x => x.color == selectedColor && x.storage == selectedStorage && x.network == selectedNetwork)
+                showPrice.forEach(x => 
+                    x.innerText = `NT$ ${selectedIpad.price}`
+                )
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
