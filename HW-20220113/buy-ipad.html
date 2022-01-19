@@ -80,41 +80,49 @@
             padding: 20px 10px;
         }
 
-        .storage-show {
+        .showStorage {
             font-size: 24px;
         }
 
-        .connection-show {
+        .showNetwork {
             font-size: 16px;
             margin-top: 10px;
         }
-        .price{
+
+        .price {
             width: 100%;
             background-color: rgb(231, 231, 231);
             font-size: 22px;
             font-weight: bold;
             padding: 30px 20px;
         }
-        .show-top{
+
+        .show-top {
             font-size: 20px;
             font-weight: bold;
             position: sticky;
             top: 0px;
             z-index: 2;
         }
-        #showImg{
+
+        #showImg {
             position: sticky;
             top: 85px;
             width: 100%;
             vertical-align: top;
         }
-        h2{
+
+        h2 {
             font-size: 20px;
         }
+
         .dropdown-toggle::after {
             content: none;
         }
-        #selected-color, #selected-storage, #selected-network{
+
+        #selected-color,
+        #selected-storage,
+        #selected-network {
             font-size: 20px;
             font-weight: bold;
             color: black;
@@ -123,10 +131,13 @@
             margin: 20px 0px;
         }
 
-        #collapseColor, #collapseStorage, #collapseNetwork{
-            border-bottom: 1px solid #ccc;
+        button[aria-expanded="true"] {
+            display: none;
         }
 
+        button[aria-expanded="false"] {
+            display: block;
+        }
     </style>
 </head>
 
@@ -206,6 +217,8 @@
         </div>
     </div>
 
+
+
     <div class="outframe m-auto mt-5">
         <div class="row w-100 g-5">
             <div class="col imgArea w-50">
@@ -214,82 +227,80 @@
             </div>
             <div class="col mainArea w-50">
                 <h1 class="ms-4 font-weight-bold">購買iPad Air</h1>
-                <div class="outfit p-2">
-                    <button id="selected-color" role="button" data-bs-toggle="collapse" href="#collapseColor" aria-expanded="true"></button>
-                    <div id="collapseColor">
-                        <h2 id="color-title">外觀</h2>
-                        <div class="colors-wrap row row-cols-2">
-                            <div class="color-btn">
-                                <button class="col selection rounded-4" id="btn-gray">
-                                    <span class="color-show rounded-circle color-gray"></span>
-                                    <p>太空灰</p>
-                                </button>
-                            </div>
-                            <div class="color-btn">
-                                <button class="col selection rounded-4" id="btn-silver">
-                                    <span class="color-show rounded-circle color-silver"></span>
-                                    <p>銀色</p>
-                                </button>
-                            </div>
-                            <div class="color-btn">
-                                <button class="col selection rounded-4" id="btn-green">
-                                    <span class="color-show rounded-circle color-green"></span>
-                                    <p>綠色</p>
-                                </button>
-                            </div>
-                            <div class="color-btn">
-                                <button class="col selection rounded-4" id="btn-rose">
-                                    <span class="color-show rounded-circle color-rose"></span>
-                                    <p>玫瑰金色</p>
-                                </button>
-                            </div>
-                            <div class="color-btn">
-                                <button class="col selection rounded-4" id="btn-skyblue">
-                                    <span class="color-show rounded-circle color-skyblue"></span>
-                                    <p>天藍色</p>
-                                </button>
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button id="selected-color" class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <h2 id="color-title">外觀</h2>
+                                <div class="colors-wrap row row-cols-2">
+                                    <template id="btnColorT">
+                                        <div class="btnColor">
+                                            <button class="col selection rounded-4">
+                                                <span class="color-show rounded-circle"></span>
+                                                <p></p>
+                                            </button>
+                                        </div>
+                                    </template>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="storage p-2">
-                    <button id="selected-storage" role="button" data-bs-toggle="collapse" href="#collapseStorage" aria-expanded="true"></button>
-                    <div id="collapseStorage">
-                        <h2 class="storage-title">儲存裝置</h2>
-                        <button class="inform"> <strong>提前為日後預留空間。</strong> 反對你有大哥地圖力量公里集中僅供，屏幕我去少年女孩子，計算。 </button>
-                        <div class="storage-wrap row row-cols-2">
-                            <div class="storage-btn">
-                                <button class="col selection rounded-4" id="btn-64">
-                                    <p class="storage-show">64GB</p>
-                                    <p>NT$18,900起</p>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button id="selected-storage" class="accordion-button collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+                                aria-controls="collapseTwo">
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <h2 class="storage-title">儲存裝置</h2>
+                                <button class="inform"> <strong>提前為日後預留空間。</strong> 反對你有大哥地圖力量公里集中僅供，屏幕我去少年女孩子，計算。
                                 </button>
-                            </div>
-                            <div class="storage-btn">
-                                <button class="col selection rounded-4" id="btn-256">
-                                    <p class="storage-show">256GB</p>
-                                    <p>NT$23,900起</p>
-                                </button>
+                                <div class="storage-wrap row row-cols-2">
+                                    <template id="btnStorageT">
+                                        <div class="btnStorage">
+                                            <button class="col selection rounded-4" id="btn-64">
+                                                <p class="showStorage"></p>
+                                                <p class="text"></p>
+                                            </button>
+                                        </div>
+                                    </template>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="network p-2">
-                    <button id="selected-network" role="button" data-bs-toggle="collapse" href="#collapseNetwork" aria-expanded="true" class=""></button>
-                    <div id="collapseNetwork">
-                        <h2 class="network-title">連線能力</h2>
-                        <button class="inform"> <strong>兩種快速的方式，讓你時時保持聯繫。</strong> 反對你有大哥地圖力量公里集中僅供，屏幕我去少年女孩子，計算。 </button>
-                        <div class="network-wrap row row-cols-2">
-                            <div class="network-btn">
-                                <button class="col selection rounded-4" id="btn-WiFi">
-                                    <p class="connection-show">Wi-Fi</p>
-                                    <p>NT$18,900起</p>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button id="selected-network" class="accordion-button collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
+                                aria-controls="collapseThree">
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <h2 class="network-title">連線能力</h2>
+                                <button class="inform"> <strong>兩種快速的方式，讓你時時保持聯繫。</strong>
+                                    反對你有大哥地圖力量公里集中僅供，屏幕我去少年女孩子，計算。
                                 </button>
-                            </div>
-                            <div class="network-btn">
-                                <button class="col selection rounded-4" id="btn-Cellular">
-                                    <p class="connection-show">Wi-Fi + 行動網路</p>
-                                    <p>NT$23,200起</p>
-                                </button>
+                                <div class="network-wrap row row-cols-2">
+                                    <template id="btnNetworkT">
+                                        <div class="btnNetwork">
+                                            <button class="col selection rounded-4" id="btn-WiFi">
+                                                <p class="showNetwork"></p>
+                                                <p class="text"></p>
+                                            </button>
+                                        </div>
+                                    </template>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -302,6 +313,7 @@
         </div>
     </div>
 
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
         integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
         crossorigin="anonymous"></script>
@@ -310,116 +322,108 @@
         crossorigin="anonymous"></script>
 
 
-
     <script>
-        let btnGray, btnSilver, btnGreen, btnRose, btnBlue, btn64, btn256, btnWiFi, btnCellular
-        let showImg, showPrice
-        let grayObj, silverObj, greenObj, roseObj, blueObj
-        let selectedColorText, selectedStorageText, selectedNetworkText
-        let selectedColor = '', selectedStorage = '', selectedNetwork = ''
-        let ipadArray, selectedIpad
+        let btnList = {
+            color: [
+                { chName: '太空灰色', enName: 'gray', fileName: '' },
+                { chName: '銀色', enName: 'silver', fileName: '' },
+                { chName: '玫瑰金色', enName: 'green', fileName: '' },
+                { chName: '綠色', enName: 'rose', fileName: '' },
+                { chName: '天藍色', enName: 'skyblue', fileName: '' }
+            ],
+            storage: [
+                { storage: '64GB', text: 'NT$18,900起' },
+                { storage: '256GB', text: 'NT$23,900起' }
+            ],
+            network: [
+                { network: 'WiFi', text: 'NT$18,900起', dataName: 'Wi-Fi' },
+                { network: 'WiFi + 行動網路', text: 'NT$23,200起', dataName: 'Cellular' }
+            ]
+        }
 
+        let btnColorT, btnStorageT, btnNetworkT, ipadArray, selectedIpad
+        let selectedColor = '', selectedStorage = '', selectedNetwork = ''
+
+        window.onload = function(){
+            
+        }
+
+        //#region xhr
         let xhr = new XMLHttpRequest()
 
-        xhr.open('GET', 'https://raw.githubusercontent.com/ting071250/FileStorage/main/hw-ipadAir_array')
         xhr.responseType = 'json'
 
         xhr.onload = function () {
             ipadArray = this.response
-            grayObj = this.response.find(x => x.color == '太空灰色')
-            silverObj = this.response.find(x => x.color == '銀色')
-            greenObj = this.response.find(x => x.color == '綠色')
-            roseObj = this.response.find(x => x.color == '玫瑰金色')
-            blueObj = this.response.find(x => x.color == '天藍色')
-        }
 
+            btnList.color.forEach(color => {
+                let target = ipadArray.find(ipad => ipad.color == color.chName)
+                color.fileName = target.picture
+            })
+        }
+        xhr.open('GET', 'https://raw.githubusercontent.com/ting071250/FileStorage/main/hw-ipadAir_array')
         xhr.send()
+        //#endregion
 
     </script>
 
     <script type="module">
         import { $gg as getTarget } from './Helpers.js'
 
-        btnGray = getTarget('#btn-gray')
-        btnSilver = getTarget('#btn-silver')
-        btnGreen = getTarget('#btn-green')
-        btnRose = getTarget('#btn-rose')
-        btnBlue = getTarget('#btn-skyblue')
-        btn64 = getTarget('#btn-64')
-        btn256 = getTarget('#btn-256')
-        btnWiFi = getTarget('#btn-WiFi')
-        btnCellular = getTarget('#btn-Cellular')
-        showImg = getTarget('#showImg')
-        showPrice = getTarget('.showPrice')
-        selectedColorText = getTarget('#selected-color')
-        selectedStorageText = getTarget('#selected-storage')
-        selectedNetworkText = getTarget('#selected-network')
-
-        btnGray.addEventListener('click', function () { ChageImg(grayObj) })
-        btnSilver.addEventListener('click', function () { ChageImg(silverObj) })
-        btnGreen.addEventListener('click', function () { ChageImg(greenObj) })
-        btnRose.addEventListener('click', function () { ChageImg(roseObj) })
-        btnBlue.addEventListener('click', function () { ChageImg(blueObj) })
-
-        function ChageImg(colorObj) {
-            showImg.src = `pic/${colorObj.picture}`
-            selectedColorText.innerText = `${colorObj.color}`
-            selectedColor = colorObj.color
-            selectedColorText.ariaExpanded = 'false'
-            selectedColorText.classList.add('collapsed')
-            selectedColorText.addEventListener('click', function(){
-                this.innerText = ''
+        btnList.color.forEach(color => {
+            btnColorT = getTarget('#btnColorT').content.cloneNode(true)
+            btnColorT.querySelector('.color-show').classList.add(`color-${color.enName}`)
+            btnColorT.querySelector('p').innerText = color.chName
+            btnColorT.querySelector('button').addEventListener('click', function () {
+                getTarget('#selected-color').innerText = color.chName
+                getTarget('#selected-color').click()
+                getTarget('#showImg').src = `pic/${color.fileName}`
+                selectedColor = color.chName
+                decideIpad()
             })
-            getTarget('#collapseColor').setAttribute('class', 'collapsing') 
-            decideIpad()
-        }
 
-        btn64.addEventListener('click', function () {
-            selectStorage('64GB')
+            getTarget('.colors-wrap').append(btnColorT)
         })
 
-        btn256.addEventListener('click', function () { 
-            selectStorage('256GB')
+        btnList.storage.forEach(stor => {
+            btnStorageT = getTarget('#btnStorageT').content.cloneNode(true)
+            btnStorageT.querySelector('.showStorage').innerText = stor.storage
+            btnStorageT.querySelector('.text').innerText = stor.text
+            btnStorageT.querySelector('button').addEventListener('click', function () {
+                getTarget('#selected-storage').innerText = stor.storage
+                getTarget('#selected-storage').click()
+                selectedStorage = stor.storage
+                decideIpad()
+            })
+
+            getTarget('.storage-wrap').append(btnStorageT)
         })
 
-        function selectStorage(stor){
-            selectedStorageText.innerText = stor 
-            selectedStorage = stor
-            selectedStorageText.ariaExpanded = 'false'
-            selectedStorageText.classList.add('collapsed')
-            getTarget('#collapseStorage').setAttribute('class', 'collapsing')
-            selectedStorageText.addEventListener('click', function(){ this.innerText = '' })
-            decideIpad()
-        }
+        btnList.network.forEach(net => {
+            btnNetworkT = getTarget('#btnNetworkT').content.cloneNode(true)
+            btnNetworkT.querySelector('.showNetwork').innerText = net.network
+            btnNetworkT.querySelector('.text').innerText = net.text
+            btnNetworkT.querySelector('button').addEventListener('click', function () {
+                getTarget('#selected-network').innerText = net.network
+                getTarget('#selected-network').click()
+                selectedNetwork = net.dataName
+                decideIpad()
+            })
 
-        btnWiFi.addEventListener('click', function () { 
-            selectNetwork('WiFi', 'Wi-Fi')
-        })
-        btnCellular.addEventListener('click', function () { 
-            selectNetwork('WiFi + 行動網路', 'Cellular')
+            getTarget('.network-wrap').append(btnNetworkT)
         })
 
-        function selectNetwork(netShow, netFile) {
-            selectedNetworkText.innerText = netShow 
-            selectedNetwork = netFile
-            selectedNetworkText.ariaExpanded = 'false'
-            selectedNetworkText.classList.add('collapsed')
-            getTarget('#collapseNetwork').setAttribute('class', 'collapsing')
-            selectedNetworkText.addEventListener('click', function(){ this.innerText = '' })
-            decideIpad()
-        }
-        
-        function decideIpad(){
-            if (selectedColor == '' || selectedStorage == '' || selectedNetwork == ''){
-                return
-            }
-            else{
-                selectedIpad = ipadArray.find(x => x.color == selectedColor && x.storage == selectedStorage && x.network == selectedNetwork)
-                showPrice.forEach(x => 
+        function decideIpad() {
+                if (selectedColor == '' || selectedStorage == '' || selectedNetwork == '') {
+                    return
+                }
+                else {
+                    selectedIpad = ipadArray.find(x => x.color == selectedColor && x.storage == selectedStorage && x.network == selectedNetwork)
+                    getTarget('.showPrice').forEach(x =>
                     x.innerText = `NT$ ${selectedIpad.price}`
-                )
+                    )
+                }
             }
-        }
 
     </script>
 
