@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>計算機</title>
+    <style>
+        button{
+            width: 70px;
+            height: 70px;
+            border-radius: 35px;
+            background-color: #ffc;
+            border: none;
+            margin: auto;
+        }
+        #textArea{
+            height: 200px;
+        }
+        #showText{
+            font-size: 40px;
+            display: inline-block;
+        }
+        #historySide, #historyTitle{
+            display: none;
+            font-size: 20px;
+        }
+        #historyTitle{
+            font-size: 22px;
+        }
+        #specialArea button{
+            background-color: #ccf;
+        }
+        #calculateArea button{
+            background-color: #fcc;
+        }
+        #calSide{
+            width: 400px;
+            margin: auto;
+        }
+        #zero{
+            width: calc(72px + 72px + 24px )
+        }
+        @media (min-width: 1200px) {
+            #historySide{
+                display: block;
+                background-color: #ccc;
+                width: 500px;
+            }
+            #historyTitle{
+                display: inline;
+            }
+            #calSide{
+                margin-left: auto;
+                margin-right: 0px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="m-4 text-center">計算機</h1>
+        <div class="m-auto row">
+            <div id="calSide" class="bg-dark">
+                <div id="textArea" class="d-flex flex-column">
+                    <p id="inputText" class="text-white"></p>
+                    <p id="showText" class="text-white ms-auto mt-auto"></p>
+                </div>
+                <div id="btnArea" class="row p-2">
+                    <div id="initialArea" class="col-9">
+                        <div id="specialArea" class="row row-cols-3">
+                            
+                        </div>
+                        <div id="numArea" class="row">
+                            
+                        </div>
+                    </div>
+                    <div id="calculateArea" class="col-3">
+                        
+                    </div>
+                </div>
+            </div>
+            <div id="historySide" class="me-auto p-4">
+                <p id="historyTitle" class="badge bg-dark">計算歷程:</p>
+                <div id="historyContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <template id="btnTemp">
+        <div class="col pt-1 pb-1 btnCol">
+            <button class="numBtn"></button>
+        </div>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+        <script>
+            const btnArray = {
+                special: [
+                    {tag: 'AC', id: 'clear'}, 
+                    {tag: '+/-', id: 'negative'}, 
+                    {tag: '%', id: 'percent'}
+                ],
+                number: [
+                        { tag : '7', id: 'seven'}, 
+                        { tag : '8', id: 'eight'}, 
+                        { tag : '9', id: 'nine'}, 
+                        { tag : '4', id: 'four'}, 
+                        { tag : '5', id: 'five'}, 
+                        { tag : '6', id: 'six'}, 
+                        { tag : '1', id: 'one'}, 
+                        { tag : '2', id: 'two'}, 
+                        { tag : '3', id: 'three'}, 
+                        { tag : '0', id: 'zero'}, 
+                        { tag : '.', id: 'dot'}
+                    ],
+                calculate: [ //func待運用!!
+                    { tag: '/', id: 'divide', func: (a, b) => a / b }, 
+                    { tag: '*', id: 'multiply', func: (a, b) => a * b }, 
+                    { tag: '-', id: 'reduce', func: (a, b) => a - b }, 
+                    { tag: '+', id: 'plus', func: (a, b) => a + b }, 
+                    { tag: '=', id: 'equal', func: (a, b) => b }
+                ]
+            }
+
+            const specialArea = document.querySelector('#specialArea')
+            const numArea = document.querySelector('#numArea')
+            const calculateArea = document.querySelector('#calculateArea')
+            const inputText = document.querySelector('#inputText')
+            const showText = document.querySelector('#showText')
+            const historyContent = document.querySelector('#historyContent')
+            let currentVal, preNum = '', symbol = '', lastInput
+
+            window.onload = function() {
+                btnArray.special.forEach(s => {
+                    createBtnProfile(s, specialArea, false)
+                })
+                btnArray.number.forEach(n => {
+                    createBtnProfile(n, numArea, true)
+                })
+                btnArray.calculate.forEach(c => {
+                    createBtnProfile(c, calculateArea, false)
+                })
+                setSpecial()
+                setCalculate()
+            }
+            
+            function createBtnProfile(item, appendTarget, isInput) {
+                let cloneBtn = document.querySelector('#btnTemp').content.cloneNode(true)
+                let currentBtn = cloneBtn.querySelector('button')
+                currentBtn.innerText = item.tag
+                currentBtn.id = `${item.id}`
+                
+                if (isInput == true){
+                    currentBtn.addEventListener('click', function(){
+                        if (typeof(lastInput) == 'string'){
+                            inputText.innerText = ''
+                            showText.innerText = ''
+                        }
+                        inputNumber(item.tag)
+                    })
+                }
+
+                appendTarget.append(cloneBtn)
+            }
+
+            function inputNumber(val) {
+                inputText.innerText += val
+                showText.innerText += val
+                lastInput = parseInt(val)
+            }
+
+            function setSpecial(){
+                document.querySelector('#clear').addEventListener('click', function(){
+                    inputText.innerText = ''
+                    showText.innerText = ''
+                    historySide.innerText = ''
+                    preNum = ''
+                    symbol = ''
+                })
+                document.querySelector('#negative').addEventListener('click', function(){
+                    currentVal = -1 * parseFloat(inputText.innerText)
+                    inputText.innerText = currentVal.toString()
+                    showText.innerText = currentVal.toString()
+                })
+                document.querySelector('#percent').addEventListener('click', function(){
+                    currentVal = parseFloat(inputText.innerText) / 100
+                    inputText.innerText = currentVal.toString()
+                    showText.innerText = currentVal.toString()
+                })
+            }
+
+            function setCalculate(){
+                btnArray.calculate.filter(x => x.id != 'equal').forEach(cal => {
+                    document.querySelector(`#${cal.id}`).addEventListener('click', function(){
+                        if (typeof(lastInput) == 'string'){
+                            lastInput = cal.tag
+                            symbol = cal.tag
+                            return
+                        }
+                        if (typeof(lastInput) == 'number' && inputText.innerText != '' ){
+                            let val = parseFloat(inputText.innerText)
+                            if (preNum == '' && symbol == ''){
+                                symbol = cal.tag
+                                preNum = val
+                            }
+                            else{
+                                let result = calculate(preNum, val)
+                                inputText.innerText = `${preNum} ${symbol} ${val}=`
+                                showText.innerText = result.toString()
+                                
+                                historySide.innerHTML += `<p>${preNum} ${symbol} ${val} = ${result}</p>`
+                                preNum = result
+                                symbol = cal.tag
+                            }
+                            lastInput = cal.tag
+                        }                            
+                    })
+                })
+                document.querySelector('#equal').onclick = function(){
+                    if (typeof(lastInput) == 'number' && inputText.innerText != '' && preNum != '' && symbol != ''){
+                        let val = parseFloat(inputText.innerText)
+                        let result = calculate(preNum, val)
+                        inputText.innerText = `${preNum}${symbol}${val}=`
+                        showText.innerText = result.toString()
+                        historySide.innerHTML += `<p>${preNum} ${symbol} ${val} = ${result}</p> <p>${'-'.repeat(10)}計算結束${'-'.repeat(10)}</p>`
+                        preNum = ''
+                        symbol = ''
+                        lastInput = ''
+                    }                            
+                }
+            }
+            function calculate(val1, val2){
+                
+                switch(symbol){
+                    case '/': 
+                        return val1 / val2
+                    case '*': 
+                        return val1 * val2
+                    case '-': 
+                        return val1 - val2
+                    case '+': 
+                        return val1 + val2
+                    default:
+                        return ''
+                }
+            }
+
+        </script>
+</body>
+
+</html>
