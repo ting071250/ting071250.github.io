@@ -65,14 +65,16 @@
                         })
                         localStorage.setItem('zip', JSON.stringify(zipCodeArray))
                     })
+                    .then(() => {
+                        initiateSelect()
+                    })
                     .catch(ex => { console.log(ex) })
                     .finally(() => { })
             }
             else {
                 zipCodeArray = JSON.parse(storageData)
+                initiateSelect()
             }
-
-            initiateSelect()
         }
 
         function initiateSelect() {
@@ -123,7 +125,7 @@
             if (districtSelect.selectedIndex == 0) {
                 submitBtn.disabled = true
             }
-            else{
+            else {
                 submitBtn.disabled = false
             }
         }
