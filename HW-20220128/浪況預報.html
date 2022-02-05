@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+
+    <!-- map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+
+
+    <style>
+        :root {
+            --iconSize: 30px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #000;
+            font-size: 12px;
+            direction: rtl;
+            margin-bottom: 10px;
+        }
+
+        .header {
+            background-image: linear-gradient(to bottom left, rgba(52, 186, 240, 0.815), rgb(18, 103, 129));
+            color: #fff;
+        }
+
+        .title {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .title p {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .container-fluid>.row {
+            height: 100vh;
+        }
+
+        #map {
+            min-height: 250px;
+            height: 100%;
+        }
+
+        i {
+            font-size: 24px;
+            width: calc(var(--iconSize) + 20px);
+            margin: auto;
+        }
+
+        .figShow {
+            font-size: var(--iconSize);
+        }
+
+        h3 {
+            font-size: 26px;
+        }
+
+        .valShow {
+            font-size: 20px;
+        }
+
+        .popupText {
+            margin: 0px;
+            font-size: 18px;
+        }
+
+        .dataArea {
+            padding: 20px;
+            background-color: #f2fcff;
+            /* background-image: linear-gradient(to bottom, #f2fcff, #9bdbf54f, #f2fcff); */
+        }
+
+        table {
+            background-color: #71c7e925;
+            border-radius: 30px;
+            border: none;
+            border-collapse: unset;
+            --bs-table-striped-bg: rgba(41, 114, 218, 0.1) !important;
+            box-shadow: 0 0 10px #2f759050;
+
+        }
+
+        table td,
+        th {
+            border-width: 0px !important;
+        }
+
+        th {
+            font-size: 20px;
+        }
+
+        .tableInit {
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgb(129, 185, 190);
+            border: none;
+        }
+
+        .north {
+            transform: rotate(0deg);
+        }
+
+        .eastNorth {
+            transform: rotate(45deg);
+        }
+
+        .east {
+            transform: rotate(90deg);
+        }
+
+        .eastSouth {
+            transform: rotate(135deg);
+        }
+
+        .south {
+            transform: rotate(180deg);
+        }
+
+        .westSouth {
+            transform: rotate(225deg);
+        }
+
+        .west {
+            transform: rotate(270deg);
+        }
+
+        .westNorth {
+            transform: rotate(315deg);
+        }
+    </style>
+
+    <!-- tooltips -->
+    <style>
+        :root {
+            --tooltips: #24949e;
+        }
+
+        .bs-tooltip-top .tooltip-arrow::before,
+        .bs-tooltip-auto[data-popper-placement^=top] .tooltip-arrow::before {
+            border-top-color: var(--tooltips);
+        }
+
+        .bs-tooltip-bottom .tooltip-arrow::before,
+        .bs-tooltip-auto[data-popper-placement^=top] .tooltip-arrow::before {
+            border-bottom-color: var(--tooltips);
+        }
+
+        .bs-tooltip-start .tooltip-arrow::before,
+        .bs-tooltip-auto[data-popper-placement^=top] .tooltip-arrow::before {
+            border-left-color: var(--tooltips);
+        }
+
+        .bs-tooltip-end .tooltip-arrow::before,
+        .bs-tooltip-auto[data-popper-placement^=top] .tooltip-arrow::before {
+            border-right-color: var(--tooltips);
+        }
+
+        .tooltip-inner {
+            background-color: var(--tooltips);
+        }
+    </style>
+
+    <title>台灣沿海天氣預報</title>
+</head>
+
+<body>
+    <div class="header">
+        <div class="title">
+            <h1>尋找你的好浪</h1>
+            <p class="d-block">台灣沿海天氣預報</p>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-12 p-0">
+                <div id="map"></div>
+            </div>
+            <div class="col-lg-6 col-12">
+                <div class="row">
+                    <div class="form-group col-6 my-4">
+                        <label for="county">快速移動(縣/市)</label>
+                        <select id="county" class="form-control"></select>
+                    </div>
+                    <div id="date" class="form-group col-12 my-4">
+                        <label for="date" class="w-100">日期</label>
+                        <div class="btn-group" role="group" aria-label="Basic outlined example"></div>
+                    </div>
+                </div>
+                <div class="row dataArea">
+                    <h2 class="w-100 text-center"><strong></strong>浪況預報</h2>
+                    <a href="https://data.gov.tw/dataset/130243">資料來源: 中央氣象局</a>
+                    <div class="col-12">
+                        <table class="table table-bordered table-striped text-center">
+                            <thead>
+                                <tr id="theadTr">
+                                    <th class="tableInit">
+                                        <span>請選擇一個區域</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Axios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.25.0/axios.min.js"
+        integrity="sha512-/Q6t3CASm04EliI1QyIDAA/nDo9R8FQ/BULoUFyN4n/BDdyIxeH7u++Z+eobdmr11gG5D/6nPFyDlnisDwhpYA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <script>
+        //todo: 潮汐??
+        //todo: 自選標準
+        //todo: datetime抓星期幾
+
+        //宣告
+        let map
+        // //台灣行政區域經緯度資料
+        let areaDataRequest = axios.get('https://raw.githubusercontent.com/ChouJustice/ChouJustice.github.io/main/Map/%E5%8F%B0%E7%81%A3%E8%A1%8C%E6%94%BF%E5%9C%B0%E5%8D%80.json')
+        //臺灣海域各地浪高週期波向觀測月統計
+        let waveDataRequest = axios.get('https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-D0047-095?Authorization=rdec-key-123-45678-011121314&format=JSON')
+
+        let areaData //行政區經緯度
+        let waveData //各地浪況
+        let waveCounty //有浪況的縣市
+        let waveAreaData = [] //整理後的資料
+        let selectLocation
+        let selectDate
+
+        let markers = L.markerClusterGroup() //地圖marker叢集群組
+
+        //DOM
+        const countySelect = document.querySelector('#county')
+        const dateArea = document.querySelector('#date .btn-group')
+        const areaText = document.querySelector('strong')
+        const tablebody = document.querySelector('tbody')
+        const theadTr = document.querySelector('#theadTr')
+        const directions = [
+            { text: '偏北', tag: 'north' },
+            { text: '東北', tag: 'eastNorth' },
+            { text: '偏東', tag: 'east' },
+            { text: '東南', tag: 'eastSouth' },
+            { text: '偏南', tag: 'south' },
+            { text: '西南', tag: 'westSouth' },
+            { text: '偏西', tag: 'west' },
+            { text: '西北', tag: 'westNorth' }
+        ]
+        const weathers = [
+            { text: '陰天', tag: 'cloud' },
+            { text: '短暫雨', tag: 'cloud-rain' },
+            { text: '陣雨', tag: 'cloud-rain' },
+            { text: '晴天', tag: 'sun' },
+            { text: '多雲', tag: 'cloud-sun' }
+        ]
+        const week = [
+            { num: 0, letter: '日' },
+            { num: 1, letter: '一' },
+            { num: 2, letter: '二' },
+            { num: 3, letter: '三' },
+            { num: 4, letter: '四' },
+            { num: 5, letter: '五' },
+            { num: 6, letter: '六' }
+        ]
+
+        //window.onload
+        window.onload = function () {
+            setMap()
+
+            //確保全部程序都成功
+            Promise.all([areaDataRequest, waveDataRequest])
+                .then(response => {
+                    let [areaRes, waveRes] = response
+                    // console.log(response)
+                    // console.log(waveRes)
+
+                    //area
+                    areaData = areaRes.data
+                    //wave
+                    waveData = waveRes.data.cwbopendata.dataset.locations.location
+                    waveCounty = waveRes.data.cwbopendata.dataset.locations.locationsName
+
+                    // console.log(areaData)
+                    // console.log(waveData)
+
+                    waveData.forEach(x => {
+                        let windSpeed = x.weatherElement[0].time.map(y => {
+                            return {
+                                date: y.dataTime.slice(0, 10),
+                                time: y.dataTime.slice(11, 16),
+                                value: y.elementValue[0].value
+                            }
+                        }).groupBy('date')
+                        let windDir = x.weatherElement[1].time.map(y => {
+                            return {
+                                date: y.dataTime.slice(0, 10),
+                                time: y.dataTime.slice(11, 16),
+                                value: y.elementValue.value
+                            }
+                        }).groupBy('date')
+                        let waveDir = x.weatherElement[2].time.map(y => {
+                            return {
+                                date: y.dataTime.slice(0, 10),
+                                time: y.dataTime.slice(11, 16),
+                                value: y.elementValue.value
+                            }
+                        }).groupBy('date')
+                        let currentDir = x.weatherElement[3].time.map(y => {
+                            return {
+                                date: y.dataTime.slice(0, 10),
+                                time: y.dataTime.slice(11, 16),
+                                value: y.elementValue.value
+                            }
+                        }).groupBy('date')
+                        let waveHeight = x.weatherElement[4].time.map(y => {
+                            return {
+                                date: y.dataTime.slice(0, 10),
+                                time: y.dataTime.slice(11, 16),
+                                value: y.elementValue.value
+                            }
+                        }).groupBy('date')
+                        let wavePeriod = x.weatherElement[5].time.map(y => {
+                            return {
+                                date: y.dataTime.slice(0, 10),
+                                time: y.dataTime.slice(11, 16),
+                                value: y.elementValue.value
+                            }
+                        }).groupBy('date')
+                        let currentSpeed = x.weatherElement[6].time.map(y => {
+                            return {
+                                date: y.dataTime.slice(0, 10),
+                                time: y.dataTime.slice(11, 16),
+                                value: y.elementValue[0].value
+                            }
+                        }).groupBy('date')
+                        let weather = x.weatherElement[8].time.map(y => {
+                            return {
+                                date: y.dataTime.slice(0, 10),
+                                time: y.dataTime.slice(11, 16),
+                                value: y.elementValue[1].value
+                            }
+                        }).groupBy('date')
+
+                        waveAreaData.push({
+                            locationName: x.locationName,
+                            Lat: x.lat != undefined ? x.lat : undefined,
+                            Lng: x.lon != undefined ? x.lon : undefined,
+                            dates: Object.keys(windSpeed),
+                            windSpeed: {
+                                id: 'windSpeed',
+                                title: x.weatherElement[0].description,
+                                datas: windSpeed,
+                                measures: 'm/s',
+                                levels: { danger: 10.0, warning: 5, min: 0 }
+                            },
+                            windDir: {
+                                id: 'windDir',
+                                title: x.weatherElement[1].description,
+                                datas: windDir,
+                                measures: '8方位'
+                            },
+                            waveDir: {
+                                id: 'waveDir',
+                                title: x.weatherElement[2].description,
+                                datas: waveDir,
+                                measures: '8方位'
+                            },
+                            currentDir: {
+                                id: 'currentDir',
+                                title: x.weatherElement[3].description,
+                                datas: currentDir,
+                                measures: '8方位'
+                            },
+                            waveHeight: {
+                                id: 'waveHeight',
+                                title: x.weatherElement[4].description,
+                                datas: waveHeight,
+                                measures: 'm',
+                                levels: { danger: 3.0, warning: 2.5, min: 1.0 }
+                            },
+                            wavePeriod: {
+                                id: 'wavePeriod',
+                                title: x.weatherElement[5].description,
+                                datas: wavePeriod,
+                                measures: 's',
+                                levels: { danger: 10.0, warning: 8.5, min: 5.0 }
+                            },
+                            currentSpeed: {
+                                id: 'currentSpeed',
+                                title: x.weatherElement[6].description,
+                                datas: currentSpeed,
+                                measures: 'm/s',
+                                levels: { danger: 0.8, warning: 0.6, min: 0 }
+                            },
+                            weather: {
+                                id: 'weather',
+                                title: x.weatherElement[8].description,
+                                datas: weather,
+                                measures: ''
+                            }
+                        })
+                    })
+
+                    console.log(waveAreaData)
+
+
+                    //初始右側縣市下拉選單
+                    Array.from(['請選擇'].concat([...new Set(areaData.map(x => x.City).filter(x => waveCounty.includes(x)))])).forEach(x => {
+                        let option = document.createElement('option')
+                        option.innerText = x
+                        option.value = x == '請選擇' ? '' : x
+                        countySelect.appendChild(option)
+                    })
+
+                    //初始日期下拉選單
+                    setDateSelector()
+                })
+                .then(() => {
+                    //初始化選擇日期
+                    selectDate = waveAreaData[0].dates[0]
+                    document.querySelector(`[value="${selectDate}"]`).classList.replace('btn-outline-primary', 'btn-primary')
+                    //初始設定地圖標籤
+                    setMarker()
+                })
+
+            countySelect.onchange = function () {
+                if (countySelect.value != '') {
+                    //地圖的焦點移動至該縣市
+                    let county = areaData.find(x => x.City == countySelect.value)
+                    map.setView([county.Lat, county.Lng], 11)
+                }
+            }
+        }
+
+        //function
+        function setMap() {
+            //初始化地圖
+            map = L.map('map', {
+                center: [25.03416068163684, 121.56454962636319],
+                zoom: 9
+            })
+            //設定圖資
+            let osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+            let osm = new L.TileLayer(osmUrl, { minZoom: 7, maxZoom: 12 })
+            map.addLayer(osm)
+        }
+
+        function setDateSelector() {
+            waveAreaData[0].dates.forEach(x => {
+                let btn = document.createElement('button')
+                btn.type = 'button'
+                btn.classList.add('btn', 'btn-outline-primary')
+                btn.value = x
+
+                let year = x.slice(0, 4)
+                let month = x.slice(5, 7)
+                let date = x.slice(8, 10)
+                let datetime = new Date(year, month - 1, date)
+                let day = week.find(x => x.num == datetime.getDay()).letter
+
+                btn.innerText = `${month}/${date}(${day})`
+
+                btn.onclick = function () {
+                    dateArea.childNodes.forEach(x => x.classList.replace('btn-primary', 'btn-outline-primary'))
+                    this.classList.replace('btn-outline-primary', 'btn-primary')
+                    selectDate = x
+                    setMarker()
+                    if (selectLocation != undefined) {
+                        setTable(waveAreaData[selectLocation])
+                    }
+                }
+
+                dateArea.appendChild(btn)
+            })
+
+            dateArea.onchange
+        }
+
+        function setMarker() {
+            if (markers) markers.clearLayers() //把標籤這個圖層清空
+
+            waveAreaData.forEach(x => {
+                let marker = L.marker([x.Lat, x.Lng])
+                let avgHeight = (x.waveHeight.datas[selectDate].slice(0, 8).map(y => parseFloat(y.value))
+                    .reduce((a, b) => a + b) / x.waveHeight.datas[selectDate].length).toFixed(2)
+                let avgPeriod = (x.wavePeriod.datas[selectDate].slice(0, 8).map(y => parseFloat(y.value))
+                    .reduce((a, b) => a + b) / x.waveHeight.datas[selectDate].length).toFixed(2)
+
+                //設定marker的彈出框
+                marker.bindPopup(
+                    `
+                    <h4>${x.locationName}</h4>
+                    <p class="popupText">${selectDate} 平均浪高: ${avgHeight} (m) </p>
+                    <p class="popupText">${selectDate} 平均波浪週期: ${avgPeriod} (s) </p>
+                    `
+                )
+
+                //自定義點擊事件 - marker只吃addEventListener
+                marker.addEventListener('click', function () {
+                    areaText.innerText = `${x.locationName}`
+                    selectLocation = waveAreaData.indexOf(x)
+                    setTable(waveAreaData[selectLocation])
+                })
+
+                markers.addLayer(marker)
+            })
+
+            map.addLayer(markers)
+        }
+
+        function setTable(location) {
+            
+            waveAreaData.forEach(x => {
+                theadTr.innerHTML = '<th></th>'
+                tablebody.innerHTML = ''
+
+                x.windDir.datas[selectDate].forEach(y => {
+                    let th = document.createElement('th')
+                    th.innerText = y.time
+                    theadTr.appendChild(th)
+                })
+
+                createValueTr(location.waveHeight)
+                createValueTr(location.wavePeriod)
+                createValueTr(location.windSpeed)
+                createValueTr(location.currentSpeed)
+                createFigureTr(location.waveDir)
+                createFigureTr(location.windDir)
+                createFigureTr(location.currentDir)
+                createFigureTr(location.weather)
+
+                setToolTips()
+
+            })
+        }
+
+        function createValueTr(el) {
+            let dataTr = document.createElement('tr')
+            // dataTr.setAttribute('class', 'd-flex')
+            dataTr.setAttribute('id', el.id)
+            let dataTd = document.createElement('td')
+            let unitToShow = el.measures != '' ? `(${el.measures})` : ''
+            dataTd.innerHTML = `<h3>${el.title}</h3>${unitToShow}`
+            dataTr.appendChild(dataTd)
+            el.datas[selectDate].forEach(x => {
+                let td = document.createElement('td')
+                td.innerHTML = `<p class="valShow">${x.value}</p>`
+
+                setLevelIcon(td, el.levels)
+
+                dataTr.appendChild(td)
+            })
+
+            tablebody.appendChild(dataTr)
+        }
+
+        function createFigureTr(el) {
+            let dataTr = document.createElement('tr')
+            // dataTr.setAttribute('class', 'row')
+            dataTr.setAttribute('id', el.id)
+            let dataTd = document.createElement('td')
+            let unitToShow = el.measures != '' ? `(${el.measures})` : ''
+            dataTd.innerHTML = `<h3>${el.title}</h3>${unitToShow}`
+            dataTr.appendChild(dataTd)
+
+            el.datas[selectDate].forEach(x => {
+                let td = document.createElement('td')
+                let icon = document.createElement('i')
+
+                if (el.id == 'windDir' || el.id == 'waveDir') {
+                    let dir = directions.find(y => x.value.includes(y.text))
+                    icon.classList.add('fas', 'fa-long-arrow-alt-down', dir.tag, 'figShow')
+                }
+                if (el.id == 'currentDir') {
+                    let dir = directions.find(y => x.value.includes(y.text))
+                    icon.classList.add('fas', 'fa-angle-double-up', dir.tag, 'figShow')
+                }
+                if (el.id == 'weather') {
+                    let wea = weathers.find(y => x.value.includes(y.text))
+                    icon.classList.add('fas', `fa-${wea.tag}`, wea.tag, 'figShow')
+                }
+                // td.setAttribute('class', 'd-flex')
+                icon.setAttribute('data-bs-toggle', 'tooltip')
+                icon.setAttribute('data-bs-placement', 'bottom')
+                icon.setAttribute('title', `${x.value}`)
+
+                td.setAttribute('align', 'center')
+                td.setAttribute('valign', 'middle')
+                td.appendChild(icon)
+
+                dataTr.appendChild(td)
+            })
+
+            tablebody.appendChild(dataTr)
+        }
+
+        function setLevelIcon(td, val) {
+            let icon = document.createElement('i')
+            if (parseFloat(td.innerText) >= val.danger) {
+                icon.classList.add('far', 'fa-dizzy', 'text-danger')
+                td.appendChild(icon)
+            }
+            else if (parseFloat(td.innerText) >= val.warning) {
+                icon.classList.add('far', 'fa-frown-open', 'text-warning')
+                td.appendChild(icon)
+            }
+            else if (parseFloat(td.innerText) <= val.min) {
+                icon.classList.add('far', 'fa-meh', 'text-secondary')
+                td.appendChild(icon)
+            }
+            else {
+                icon.classList.add('far', 'fa-grin-squint', 'text-success')
+                td.appendChild(icon)
+            }
+        }
+
+        function setToolTips() {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        }
+
+        function createSpinner() {
+            let div = document.createElement('div')
+            div.classList.add('spinner-border', 'text-primary')
+            // div.setAttribute('role', 'status')
+            let span = document.createElement('span')
+            span.classList.add('visually-hidden')
+            div.appendChild(span)
+            tablebody.appendChild(div)
+        }
+        //array groupby
+        Array.prototype.groupBy = function (prop) {
+            return this.reduce(function (groups, item) {
+                const val = item[prop]
+                groups[val] = groups[val] || []
+                groups[val].push(item)
+                return groups
+            }, {})
+        }
+
+    </script>
+
+</body>
+
+</html>
