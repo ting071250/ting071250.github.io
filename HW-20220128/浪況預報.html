@@ -31,6 +31,7 @@
             text-decoration: none;
             color: #000;
             font-size: 12px;
+            display: block;
             direction: rtl;
             margin-bottom: 10px;
         }
@@ -74,7 +75,7 @@
         }
 
         h3 {
-            font-size: 26px;
+            font-size: 22px;
         }
 
         .valShow {
@@ -92,13 +93,18 @@
             /* background-image: linear-gradient(to bottom, #f2fcff, #9bdbf54f, #f2fcff); */
         }
 
+        .tableArea {
+            overflow-x: auto;
+            border-radius: 30px;
+            box-shadow: 0 0 10px #2f759050;
+        }
+
         table {
             background-color: #71c7e925;
-            border-radius: 30px;
+            margin-bottom: 0px !important;
             border: none;
             border-collapse: unset;
             --bs-table-striped-bg: rgba(41, 114, 218, 0.1) !important;
-            box-shadow: 0 0 10px #2f759050;
 
         }
 
@@ -109,15 +115,6 @@
 
         th {
             font-size: 20px;
-        }
-
-        .tableInit {
-            height: 50vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgb(129, 185, 190);
-            border: none;
         }
 
         .north {
@@ -205,25 +202,158 @@
                         <label for="county">快速移動(縣/市)</label>
                         <select id="county" class="form-control"></select>
                     </div>
+                    <div id="leverSelect row">
+                        <div class="accordion" id="accordionExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        自選浪高(未完成)
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show"
+                                    aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body row">
+                                        <div class="form-group col-6 my-4 px-4">
+                                            <label for="minHeight" class="form-label">最小浪高(m)</label>
+                                            <input id="minHeight" type="range" class="form-range" min="0.5" max="1.0" step="0.1"
+                                                title="Tooltip on bottom">
+                                            <div class="d-flex justify-content-between">
+                                                <label for="minHeight">0.7</label>
+                                                <label for="minHeight">0.8</label>
+                                                <label for="minHeight">0.9</label>
+                                                <label for="minHeight">1.0</label>
+                                                <label for="minHeight">1.1</label>
+                                                <label for="minHeight">1.2</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-6 my-4 px-4">
+                                            <label for="maxHeight" class="form-label">最大浪高(m) - 警告門檻</label>
+                                            <input id="maxHeight" type="range" class="form-range" min="1.5" max="2.0" step="0.1">
+                                            <div class="d-flex justify-content-between">
+                                                <label for="maxHeight">2.2</label>
+                                                <label for="maxHeight">2.3</label>
+                                                <label for="maxHeight">2.4</label>
+                                                <label for="maxHeight">2.5</label>
+                                                <label for="maxHeight">2.6</label>
+                                                <label for="maxHeight">2.7</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        自選週期(未完成)
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="accordion-body row">
+                                        <div class="form-group col-6 my-4 px-4">
+                                            <label for="minPeriod" class="form-label">最小週期(s)</label>
+                                            <input id="minPeriod" type="range" class="form-range" min="3" max="5" step="0.5">
+                                            <div class="d-flex justify-content-between">
+                                                <label for="minPeriod">4.0</label>
+                                                <label for="minPeriod">4.5</label>
+                                                <label for="minPeriod">5.0</label>
+                                                <label for="minPeriod">5.5</label>
+                                                <label for="minPeriod">6.0</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-6 my-4 px-4">
+                                            <label for="maxPeriod" class="form-label">最大週期(s) - 警告門檻</label>
+                                            <input id="maxPeriod" type="range" class="form-range" min="8" max="10" step="0.5">
+                                            <div class="d-flex justify-content-between">
+                                                <label for="maxPeriod">7.5</label>
+                                                <label for="maxPeriod">8.0</label>
+                                                <label for="maxPeriod">8.5</label>
+                                                <label for="maxPeriod">9.0</label>
+                                                <label for="maxPeriod">9.5</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div id="date" class="form-group col-12 my-4">
                         <label for="date" class="w-100">日期</label>
                         <div class="btn-group" role="group" aria-label="Basic outlined example"></div>
                     </div>
                 </div>
-                <div class="row dataArea">
-                    <h2 class="w-100 text-center"><strong></strong>浪況預報</h2>
+                <div class="dataArea">
+                    <h2 class="text-center"><strong></strong>浪況預報</h2>
                     <a href="https://data.gov.tw/dataset/130243">資料來源: 中央氣象局</a>
-                    <div class="col-12">
+                    <div class="tableArea">
                         <table class="table table-bordered table-striped text-center">
                             <thead>
                                 <tr id="theadTr">
-                                    <th class="tableInit">
-                                        <span>請選擇一個區域</span>
-                                    </th>
+                                    <th></th>
+                                    <th>00:00</th>
+                                    <th>03:00</th>
+                                    <th>06:00</th>
+                                    <th>09:00</th>
+                                    <th>12:00</th>
+                                    <th>15:00</th>
+                                    <th>18:00</th>
+                                    <th>21:00</th>
                                 </tr>
                             </thead>
                             <tbody>
-
+                                <tr id="waveHeight">
+                                    <td>
+                                        <h3>浪高</h3>
+                                        (m)
+                                    </td>
+                                    <td valign="middle" class="tableInit" colspan="8" rowspan="8">
+                                        請選擇一個區域
+                                    </td>
+                                </tr>
+                                <tr id="wavePeriod">
+                                    <td>
+                                        <h3>浪週期</h3>
+                                        (s)
+                                    </td>
+                                </tr>
+                                <tr id="windSpeed">
+                                    <td>
+                                        <h3>風速</h3>
+                                        (m/s)
+                                    </td>
+                                </tr>
+                                <tr id="currentSpeed">
+                                    <td>
+                                        <h3>流速</h3>
+                                        (m/s)
+                                    </td>
+                                </tr>
+                                <tr id="waveDir">
+                                    <td>
+                                        <h3>浪向</h3>
+                                        (8方位)
+                                    </td>
+                                </tr>
+                                <tr id="windDir">
+                                    <td>
+                                        <h3>風向</h3>
+                                        (8方位)
+                                    </td>
+                                </tr>
+                                <tr id="currentDir">
+                                    <td>
+                                        <h3>流向</h3>
+                                        (8方位)
+                                    </td>
+                                </tr>
+                                <tr id="weather">
+                                    <td>
+                                        <h3>天氣狀況</h3>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -244,7 +374,6 @@
     <script>
         //todo: 潮汐??
         //todo: 自選標準
-        //todo: datetime抓星期幾
 
         //宣告
         let map
@@ -542,88 +671,86 @@
 
         function setTable(location) {
             
+            
             waveAreaData.forEach(x => {
-                theadTr.innerHTML = '<th></th>'
-                tablebody.innerHTML = ''
-
-                x.windDir.datas[selectDate].forEach(y => {
-                    let th = document.createElement('th')
-                    th.innerText = y.time
-                    theadTr.appendChild(th)
-                })
-
-                createValueTr(location.waveHeight)
-                createValueTr(location.wavePeriod)
-                createValueTr(location.windSpeed)
-                createValueTr(location.currentSpeed)
-                createFigureTr(location.waveDir)
-                createFigureTr(location.windDir)
-                createFigureTr(location.currentDir)
-                createFigureTr(location.weather)
+                
+                setValueTr(location.waveHeight)
+                setValueTr(location.wavePeriod)
+                setValueTr(location.windSpeed)
+                setValueTr(location.currentSpeed)
+                setFigureTr(location.waveDir)
+                setFigureTr(location.windDir)
+                setFigureTr(location.currentDir)
+                setFigureTr(location.weather)
 
                 setToolTips()
-
             })
         }
 
-        function createValueTr(el) {
-            let dataTr = document.createElement('tr')
-            // dataTr.setAttribute('class', 'd-flex')
-            dataTr.setAttribute('id', el.id)
-            let dataTd = document.createElement('td')
-            let unitToShow = el.measures != '' ? `(${el.measures})` : ''
-            dataTd.innerHTML = `<h3>${el.title}</h3>${unitToShow}`
-            dataTr.appendChild(dataTd)
-            el.datas[selectDate].forEach(x => {
+        function setValueTr(el) {
+            let dataTr = document.querySelector(`#${el.id}`)
+            while (dataTr.childElementCount > 1) {
+                dataTr.removeChild(dataTr.lastChild)
+            }
+            let timesObj = el.datas[selectDate]
+            let dataIndex = 0
+            for (let i = 1; i <= 8; i++) {
                 let td = document.createElement('td')
-                td.innerHTML = `<p class="valShow">${x.value}</p>`
 
-                setLevelIcon(td, el.levels)
+                if (dataIndex < timesObj.length && theadTr.querySelectorAll('th')[i].innerText == timesObj[dataIndex].time) {
+                    td.innerHTML = `<p class="valShow">${timesObj[dataIndex].value}</p>`
+                    setLevelIcon(td, el.levels)
+                    dataIndex++
+
+                }
+                else {
+                    td.innerText = '-'
+                }
 
                 dataTr.appendChild(td)
-            })
-
-            tablebody.appendChild(dataTr)
+            }
         }
 
-        function createFigureTr(el) {
-            let dataTr = document.createElement('tr')
-            // dataTr.setAttribute('class', 'row')
-            dataTr.setAttribute('id', el.id)
-            let dataTd = document.createElement('td')
-            let unitToShow = el.measures != '' ? `(${el.measures})` : ''
-            dataTd.innerHTML = `<h3>${el.title}</h3>${unitToShow}`
-            dataTr.appendChild(dataTd)
+        function setFigureTr(el) {
+            let dataTr = document.querySelector(`#${el.id}`)
+            while (dataTr.childElementCount > 1) {
+                dataTr.removeChild(dataTr.lastChild)
+            }
 
-            el.datas[selectDate].forEach(x => {
+            let timesObj = el.datas[selectDate]
+            let dataIndex = 0
+            for (let i = 1; i <= 8; i++) {
                 let td = document.createElement('td')
-                let icon = document.createElement('i')
 
-                if (el.id == 'windDir' || el.id == 'waveDir') {
-                    let dir = directions.find(y => x.value.includes(y.text))
-                    icon.classList.add('fas', 'fa-long-arrow-alt-down', dir.tag, 'figShow')
-                }
-                if (el.id == 'currentDir') {
-                    let dir = directions.find(y => x.value.includes(y.text))
-                    icon.classList.add('fas', 'fa-angle-double-up', dir.tag, 'figShow')
-                }
-                if (el.id == 'weather') {
-                    let wea = weathers.find(y => x.value.includes(y.text))
-                    icon.classList.add('fas', `fa-${wea.tag}`, wea.tag, 'figShow')
-                }
-                // td.setAttribute('class', 'd-flex')
-                icon.setAttribute('data-bs-toggle', 'tooltip')
-                icon.setAttribute('data-bs-placement', 'bottom')
-                icon.setAttribute('title', `${x.value}`)
+                if (dataIndex < timesObj.length && theadTr.querySelectorAll('th')[i].innerText == timesObj[dataIndex].time) {
+                    let icon = document.createElement('i')
+                    if (el.id == 'windDir' || el.id == 'waveDir') {
+                        let dir = directions.find(y => timesObj[dataIndex].value.includes(y.text))
+                        icon.classList.add('fas', 'fa-long-arrow-alt-down', dir.tag, 'figShow')
+                    }
+                    else if (el.id == 'currentDir') {
+                        let dir = directions.find(y => timesObj[dataIndex].value.includes(y.text))
+                        icon.classList.add('fas', 'fa-angle-double-up', dir.tag, 'figShow')
+                    }
+                    else if (el.id == 'weather') {
+                        let wea = weathers.find(y => timesObj[dataIndex].value.includes(y.text))
+                        icon.classList.add('fas', `fa-${wea.tag}`, wea.tag, 'figShow')
+                    }
+                    // td.setAttribute('class', 'd-flex')
+                    icon.setAttribute('data-bs-toggle', 'tooltip')
+                    icon.setAttribute('data-bs-placement', 'bottom')
+                    icon.setAttribute('title', `${timesObj[dataIndex].value}`)
 
-                td.setAttribute('align', 'center')
-                td.setAttribute('valign', 'middle')
-                td.appendChild(icon)
+                    td.setAttribute('valign', 'middle')
+                    td.appendChild(icon)
+                    dataIndex++
+                }
+                else {
+                    td.innerText = '-'
+                }
 
                 dataTr.appendChild(td)
-            })
-
-            tablebody.appendChild(dataTr)
+            }
         }
 
         function setLevelIcon(td, val) {
