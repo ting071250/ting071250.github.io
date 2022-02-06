@@ -216,8 +216,8 @@
                                     <div class="accordion-body row">
                                         <div class="form-group col-6 my-4 px-4">
                                             <label for="minHeight" class="form-label">最小浪高(m)</label>
-                                            <input id="minHeight" type="range" class="form-range" min="0.5" max="1.0" step="0.1"
-                                                title="Tooltip on bottom">
+                                            <input id="minHeight" type="range" class="form-range" min="0.5" max="1.0"
+                                                step="0.1" title="Tooltip on bottom">
                                             <div class="d-flex justify-content-between">
                                                 <label for="minHeight">0.7</label>
                                                 <label for="minHeight">0.8</label>
@@ -229,7 +229,8 @@
                                         </div>
                                         <div class="form-group col-6 my-4 px-4">
                                             <label for="maxHeight" class="form-label">最大浪高(m) - 警告門檻</label>
-                                            <input id="maxHeight" type="range" class="form-range" min="1.5" max="2.0" step="0.1">
+                                            <input id="maxHeight" type="range" class="form-range" min="1.5" max="2.0"
+                                                step="0.1">
                                             <div class="d-flex justify-content-between">
                                                 <label for="maxHeight">2.2</label>
                                                 <label for="maxHeight">2.3</label>
@@ -254,7 +255,8 @@
                                     <div class="accordion-body row">
                                         <div class="form-group col-6 my-4 px-4">
                                             <label for="minPeriod" class="form-label">最小週期(s)</label>
-                                            <input id="minPeriod" type="range" class="form-range" min="3" max="5" step="0.5">
+                                            <input id="minPeriod" type="range" class="form-range" min="3" max="5"
+                                                step="0.5">
                                             <div class="d-flex justify-content-between">
                                                 <label for="minPeriod">4.0</label>
                                                 <label for="minPeriod">4.5</label>
@@ -265,7 +267,8 @@
                                         </div>
                                         <div class="form-group col-6 my-4 px-4">
                                             <label for="maxPeriod" class="form-label">最大週期(s) - 警告門檻</label>
-                                            <input id="maxPeriod" type="range" class="form-range" min="8" max="10" step="0.5">
+                                            <input id="maxPeriod" type="range" class="form-range" min="8" max="10"
+                                                step="0.5">
                                             <div class="d-flex justify-content-between">
                                                 <label for="maxPeriod">7.5</label>
                                                 <label for="maxPeriod">8.0</label>
@@ -670,21 +673,17 @@
         }
 
         function setTable(location) {
-            
-            
-            waveAreaData.forEach(x => {
-                
-                setValueTr(location.waveHeight)
-                setValueTr(location.wavePeriod)
-                setValueTr(location.windSpeed)
-                setValueTr(location.currentSpeed)
-                setFigureTr(location.waveDir)
-                setFigureTr(location.windDir)
-                setFigureTr(location.currentDir)
-                setFigureTr(location.weather)
 
-                setToolTips()
-            })
+            setValueTr(location.waveHeight)
+            setValueTr(location.wavePeriod)
+            setValueTr(location.windSpeed)
+            setValueTr(location.currentSpeed)
+            setFigureTr(location.waveDir)
+            setFigureTr(location.windDir)
+            setFigureTr(location.currentDir)
+            setFigureTr(location.weather)
+
+            setToolTips()
         }
 
         function setValueTr(el) {
