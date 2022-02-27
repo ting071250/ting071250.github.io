@@ -13,12 +13,13 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 
+
     <style>
         * {
             margin: 0;
             padding: 0;
             list-style: none;
-            font-size: 0px;
+            /* font-size: 0px; */
             border: none;
             background-color: transparent;
         }
@@ -27,6 +28,7 @@
             --diceSize: 50px;
             --paddingInBtn: 10px;
             --textSizeInBtn: 20px;
+            --tableColor: rgb(2, 59, 19);
         }
 
         .header {
@@ -46,7 +48,8 @@
 
         .mainTable {
             height: 86vh;
-            background-color: rgb(2, 59, 19);
+            min-height: 450px;
+            background-color: var(--tableColor);
             margin-bottom: 2vh;
             margin-top: 2vh;
             box-shadow: 0px 0px 5px #000;
@@ -56,15 +59,34 @@
 
         #counterSide {
             margin: 30px 0px auto;
-            width: calc( var(--diceSize) * 2 + 20px);
+            width: calc((var(--diceSize) + 5) * 6);
+            position: relative;
         }
 
         #ownSide {
             margin: auto 0px 30px;
-            width: calc( var(--diceSize) * 2 + 20px);
+            width: calc((var(--diceSize) + 5) * 6);
+            position: relative;
         }
 
-        .diceUnit{
+        .text {
+            font-size: 20px;
+            background-color: rgba(1, 20, 7, 0.5);
+            color: #fff;
+            position: absolute;
+            margin: auto;
+            padding: 10px;
+        }
+
+        #counterSide>.text {
+            top: calc((var(--diceSize) + 20px));
+        }
+
+        #ownSide>.text {
+            bottom: calc((var(--diceSize) + 20px));
+        }
+
+        .diceUnit {
             padding: 5px;
         }
 
@@ -78,6 +100,18 @@
             padding-left: calc(var(--diceSize) / 10);
             padding-right: calc(var(--diceSize) / 10);
             display: none;
+        }
+
+        .dice.covered {
+            background-color: var(--tableColor);
+            border: dashed 1px black;
+            /* color: #fff; */
+            /* font-size: 30px; */
+            transition: .3s;
+        }
+
+        .dice.covered span {
+            background-color: var(--tableColor);
         }
 
         .strip {
@@ -108,21 +142,48 @@
             display: flex;
         }
 
-        .buttonArea {
+        #startArea,
+        #selectArea,
+        #catchOrNotArea {
             width: 350px;
-            height: calc(1 * (var(--textSizeInBtn) + 4 * var(--paddingInBtn)));
             background-color: #ffffff80;
             margin: auto;
             position: absolute;
             top: 0px;
-            bottom: 0px;
+            bottom: 20%;
             right: 0px;
             left: 0px;
+            z-index: -1;
             border-radius: 5px;
+            transition: .3s;
         }
 
-        .buttonArea>.col {
-            padding: var(--paddingInBtn);
+        #startArea.areaShow,
+        #selectArea.areaShow,
+        #catchOrNotArea.areaShow {
+            z-index: 1;
+            bottom: 0px;
+            transition: .3s;
+        }
+
+        #startArea {
+            height: calc(1 * (var(--textSizeInBtn) + 4 * var(--paddingInBtn)));
+        }
+
+        #catchOrNotArea {
+            height: calc(1 * (var(--textSizeInBtn) + 4 * var(--paddingInBtn)));
+        }
+
+        #selectArea {
+            height: calc(2 * (var(--textSizeInBtn) + 4 * var(--paddingInBtn)));
+        }
+
+        #startArea .col,
+        #selectArea .col,
+        #catchOrNotArea .col {
+            padding-top: var(--paddingInBtn);
+            padding-bottom: var(--paddingInBtn);
+            text-align: center;
         }
 
         button {
@@ -131,6 +192,20 @@
             padding: var(--paddingInBtn);
         }
 
+        option[disabled] {
+            background-color: rgb(204, 201, 201);
+        }
+
+        #inform{
+            width: 100px;
+            font-size: 20px;
+            position: absolute;
+            border-radius: 5px;
+            left: 20px;
+            top: 20px;
+            background-color: #ffffff80;
+            text-align: center;
+        }
     </style>
 
     <title>Little Dice</title>
@@ -142,7 +217,232 @@
     </div>
     <div class="container">
         <div class="mainTable row flex-column">
+            <div id="inform" class="d-none">
+                <span>現在: </span>
+                <p></p>
+            </div>
             <div id="counterSide" class="d-flex justify-content-center">
+                <div class="text me-auto">對方</div>
+                <div class="diceUnit col">
+                    <div dotVal="oneDot" class="dice diceRed active">
+                        <div class="strip">
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="twoDot" class="dice">
+                        <div class="strip diceIncline">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="threeDot" class="dice">
+                        <div class="strip diceIncline">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="fourDot" class="dice diceRed">
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="fiveDot" class="dice">
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="sixDot" class="dice">
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="diceUnit col">
+                    <div dotVal="oneDot" class="dice diceRed active">
+                        <div class="strip">
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="twoDot" class="dice">
+                        <div class="strip diceIncline">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="threeDot" class="dice">
+                        <div class="strip diceIncline">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="fourDot" class="dice diceRed">
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="fiveDot" class="dice">
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="sixDot" class="dice">
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="diceUnit col">
+                    <div dotVal="oneDot" class="dice diceRed active">
+                        <div class="strip">
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="twoDot" class="dice">
+                        <div class="strip diceIncline">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="threeDot" class="dice">
+                        <div class="strip diceIncline">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="fourDot" class="dice diceRed">
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="fiveDot" class="dice">
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="sixDot" class="dice">
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="diceUnit col">
+                    <div dotVal="oneDot" class="dice diceRed active">
+                        <div class="strip">
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="twoDot" class="dice">
+                        <div class="strip diceIncline">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="threeDot" class="dice">
+                        <div class="strip diceIncline">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="fourDot" class="dice diceRed">
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="fiveDot" class="dice">
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="sixDot" class="dice">
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
                 <div class="diceUnit col">
                     <div dotVal="oneDot" class="dice diceRed active">
                         <div class="strip">
@@ -255,6 +555,227 @@
                 </div>
             </div>
             <div id="ownSide" class="d-flex justify-content-center">
+                <div class="text me-auto">己方</div>
+                <div class="diceUnit col">
+                    <div dotVal="oneDot" class="dice diceRed active">
+                        <div class="strip">
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="twoDot" class="dice">
+                        <div class="strip diceIncline">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="threeDot" class="dice">
+                        <div class="strip diceIncline">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="fourDot" class="dice diceRed">
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="fiveDot" class="dice">
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="sixDot" class="dice">
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="diceUnit col">
+                    <div dotVal="oneDot" class="dice diceRed active">
+                        <div class="strip">
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="twoDot" class="dice">
+                        <div class="strip diceIncline">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="threeDot" class="dice">
+                        <div class="strip diceIncline">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="fourDot" class="dice diceRed">
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="fiveDot" class="dice">
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="sixDot" class="dice">
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="diceUnit col">
+                    <div dotVal="oneDot" class="dice diceRed active">
+                        <div class="strip">
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="twoDot" class="dice">
+                        <div class="strip diceIncline">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="threeDot" class="dice">
+                        <div class="strip diceIncline">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="fourDot" class="dice diceRed">
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="fiveDot" class="dice">
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="sixDot" class="dice">
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="diceUnit col">
+                    <div dotVal="oneDot" class="dice diceRed active">
+                        <div class="strip">
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="twoDot" class="dice">
+                        <div class="strip diceIncline">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="threeDot" class="dice">
+                        <div class="strip diceIncline">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="fourDot" class="dice diceRed">
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="fiveDot" class="dice">
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div dotVal="sixDot" class="dice">
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="strip">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
                 <div class="diceUnit col">
                     <div dotVal="oneDot" class="dice diceRed active">
                         <div class="strip">
@@ -367,15 +888,55 @@
                 </div>
             </div>
 
-            <div class="buttonArea row">
-                <!-- <div class="col col-6">
-                    <button id="bigBtn" class="btn btn-warning">大</button>
+            <div id="startArea">
+                <div class="row">
+                    <div class="col col-12">
+                        <button id="startBtn" onclick="startGame()" class="btn btn-primary">Start</button>
+                    </div>
                 </div>
-                <div class="col col-6">
-                    <button id="smallBtn" class="btn btn-success">小</button>
-                </div> -->
-                <div class="col col-12">
-                    <button id="startBtn" class="btn btn-primary">Start</button>
+            </div>
+            <div id="catchOrNotArea">
+                <div class="row">
+                    <div class="col col-6">
+                        <button id="catchBtn" class="btn btn-warning" onclick="toCatch()">抓</button>
+                    </div>
+                    <div class="col col-6">
+                        <button id="notCatchBtn" class="btn btn-success" onclick="notToCatch()">不抓</button>
+                    </div>
+                </div>
+            </div>
+            <div id="selectArea">
+                <div class="row align-items-center">
+                    <div class="col col-md-5">
+                        <select id="amountSelector" class="form-select" aria-label="Default select example">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                    </div>
+                    <div class="col"><span>個</span></div>
+                    <div class="col col-md-5">
+                        <select id="dotSelector" class="form-select" aria-label="Default select example">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                    </div>
+                    <div class="col col-12">
+                        <button id="confirmBtn" class="btn btn-primary" onclick="setAmountAndDot()">確定</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -387,9 +948,6 @@
         crossorigin="anonymous"></script>
 
     <script>
-        //todo: 每顆骰子有不同的總步數
-        //todo: 選擇比大或比小
-        
         const dots = [
             { num: 1, str: 'oneDot' },
             { num: 2, str: 'twoDot' },
@@ -399,47 +957,127 @@
             { num: 6, str: 'sixDot' }
         ]
 
-        const diceCounter = document.querySelector('#counterSide')
-        const diceOwn = document.querySelector('#ownSide')
+        const counterSide = document.querySelector('#counterSide')
+        const ownSide = document.querySelector('#ownSide')
+
+        const startArea = document.querySelector('#startArea')
         const startBtn = document.querySelector('#startBtn')
 
-        let fullSteps
-        let currentStep
-        let timeInterval
-        let counterPoint = []
-        let ownPoint = []
+        //todo: 改用modal??
+        const inform = document.querySelector('#inform')
+        const catchOrNotArea = document.querySelector('#catchOrNotArea')
+        const catchBtn = document.querySelector('#catchBtn')
+        const notCatchBtn = document.querySelector('#notCatchBtn')
+
+        const selectArea = document.querySelector('#selectArea')
+        const amountSelector = document.querySelector('#amountSelector')
+        const dotSelector = document.querySelector('#dotSelector')
+        const confirmBtn = document.querySelector('#confirmBtn')
+
+        const Areas = [startArea, catchOrNotArea, selectArea]
+
+        let round = 0
+        let currentDotAmount = { dot: 0, amount: 0 }
+        let initDotAmount = {
+            1: 0,
+            2: 0,
+            3: 0,
+            4: 0,
+            5: 0,
+            6: 0
+        }
+        let ownDotAmount
+        let counterDotAmount
+        let totalDotAmount
+        let isMyturn = true
+        let NotCatch
 
         window.onload = function () {
+            switchShowingArea(true, startArea)
+        }
 
-            startBtn.onclick = function () {
-                counterPoint.length = 0
-                ownPoint.length = 0
-                event.target.setAttribute('disabled', 'true')
-                fullSteps = getRandom(30, 20)
-                currentStep = fullSteps
-                timeInterval = 100
+        async function startGame() {
+            //todo: 隨機決定誰先
+            
+            ownDotAmount = { ...initDotAmount }
+            counterDotAmount = { ...initDotAmount }
+            currentDotAmount = { dot: 0, amount: 0 }
+            amountSelector.value = 1
+            dotSelector.value = 1
+            inform.setAttribute('class', 'd-none')
+            inform.querySelector('p').innerText = ''
 
-                diceCounter.querySelectorAll('.diceUnit').forEach(x => {
-                    changeDice(counterPoint, x)
-                })
-                diceOwn.querySelectorAll('.diceUnit').forEach(x => {
-                    changeDice(ownPoint, x)
-                })
+            switchShowingArea(false)
+
+            setTimeout(() => {
+                // counterSide.querySelectorAll('.dice').forEach(x => {
+                //     x.classList.add('covered')
+                // })
+                let diceUnits = counterSide.querySelectorAll('.diceUnit')
+                let idx = 0
+                let interval = setInterval(() => {
+                    if (idx > 5) {
+                        clearInterval(interval)
+                        return
+                    }
+                    diceUnits[idx].querySelectorAll('.dice').forEach(x => {
+                        x.classList.add('covered')
+                    })
+                    idx++
+                }, 100);
+            }, 1000)
+            await Promise.all([rollDices(counterSide, counterDotAmount), rollDices(ownSide, ownDotAmount)])
+
+            totalDotAmount = { ...initDotAmount }
+            for (let i = 1; i <= 6; i++) {
+                totalDotAmount[i] = ownDotAmount[i] + counterDotAmount[i]
             }
+
+            if (NotCatch == undefined || NotCatch == true) switchShowingArea(true, selectArea)
         }
 
-        function comparePoint() {
-            let counter = counterPoint.reduce((x, y) => { return x + y })
-            let own = ownPoint.reduce((x, y) => { return x + y })
+        function rollDices(side, obj) {
 
-            if (own > counter) alert('Win')
-            else if (own < counter) alert('Lose')
-            else alert('equal')
+            // let finalDice
+
+            // for (let currentStep = 0; currentStep <= fullSteps; currentStep++) {
+            //     if (currentStep > (fullSteps * 2 / 3)) timeInterval += 10
+
+            //     setTimeout(function () {
+            //         let dice = changeDice(diceUnit)
+            //         if (currentStep == fullSteps) {
+            //             obj[dice] += 1
+            //         }
+            //     }, timeInterval * currentStep)
+            // }
+            return new Promise((resolve, reject) => {
+                side.querySelectorAll('.diceUnit').forEach((diceUnit) => {
+                    let fullSteps = getRandom(20, 30)
+                    let currentStep = 0
+                    let timeInterval = 100
+                    let dice
+
+                    let intervalID = setInterval(() => {
+                        if (currentStep > (fullSteps * 2 / 3)) timeInterval += 10
+                        currentStep++
+                        if (currentStep != fullSteps) {
+                            dice = changeDice(diceUnit)
+                        }
+                        else {
+                            clearInterval(intervalID)
+                            obj[dice] += 1
+                            if (Object.values(obj).reduce((x, y) => x + y) == 6) {
+                                return resolve(obj)
+                            }
+                        }
+                    }, timeInterval);
+                })
+            })
         }
 
-        function changeDice(point, dice) {
-            let currentDice = dice.querySelector('.dice.active')
-            let currentDot = Array.from(dice.querySelectorAll('.dice')).indexOf(currentDice) + 1
+        function changeDice(diceUnit) {
+            let currentDice = diceUnit.querySelector('.dice.active')
+            let currentDot = Array.from(diceUnit.querySelectorAll('.dice')).indexOf(currentDice) + 1
             currentDice.classList.remove('active')
 
             let newDot = currentDot
@@ -448,34 +1086,106 @@
                 newDot = getRandom(1, 6)
             }
 
-            currentDice = dice.querySelector(`[dotVal=${dots.find(x => x.num == newDot).str}]`)
+            //更新骰子
+            currentDice = diceUnit.querySelector(`[dotVal=${dots.find(x => x.num == newDot).str}]`)
             currentDice.classList.add('active')
             currentDot = newDot
-            currentStep--
+            return currentDot
+        }
 
-            if (currentStep > 0) {
-                if (currentStep > (fullSteps / 3)) {
-                    timeInterval += 20
-                }
-                setTimeout(function () {
-                    changeDice(point, dice)
-                }, timeInterval)
+        //第一個參數為bool，代表有沒有area要被開啟，true的話一定要有第二個參數
+        function switchShowingArea(hasArea, ...Area) {
+            Areas.forEach(x => x.removeAttribute('class'))
+            if (hasArea) Area[0].setAttribute('class', 'areaShow')
+        }
+
+        function setAmountAndDot() {
+            //更新喊的點數數量
+            if (currentDotAmount.amount >= parseInt(amountSelector.value) &&
+                currentDotAmount.dot >= parseInt(dotSelector.value)) {
+                alert('數量或點數必須提升!')
+                return
+            }
+            currentDotAmount.amount = parseInt(amountSelector.value)
+            currentDotAmount.dot = parseInt(dotSelector.value)
+            inform.setAttribute('class', 'd-block')
+            inform.querySelector('p').innerText = `${currentDotAmount.amount} 個 ${currentDotAmount.dot}`
+            turnToCounterSide()
+        }
+
+        function turnToCounterSide() {
+            switchShowingArea(false)
+            isMyturn = false
+
+            //電腦動作
+            setTimeout(() => {
+                counterMove()
+            }, 3000);
+        }
+
+        function counterMove() {
+            if (currentDotAmount.amount > counterDotAmount[currentDotAmount.dot] + 2 || 
+            (currentDotAmount.amount >= 6 && currentDotAmount.dot >= 6)) {
+                alert('對方抓你!')
+                toCatch()
+                return
+            }
+            //todo: 根據counter的點數與現在喊的點數決定怎麼喊
+            let amount = 0
+            let dot = 0
+            while (currentDotAmount.amount >= amount &&
+                currentDotAmount.dot >= dot) {
+                amount = getRandom(1, 6)
+                dot = getRandom(1, 6)
+            }
+            currentDotAmount.amount = amount
+            currentDotAmount.dot = dot
+            alert(`對方喊${amount}個${dot}`)
+            inform.querySelector('p').innerText = `${currentDotAmount.amount} 個 ${currentDotAmount.dot}`
+
+            switchShowingArea(true, catchOrNotArea)
+            isMyturn = true
+        }
+
+        function toCatch() {
+            //抓! 計算雙方各點數的數量，與目前喊得點數數量做比對
+            counterSide.querySelectorAll('.dice').forEach(x => {
+                x.classList.remove('covered')
+            })
+            alert(`總共有${totalDotAmount[currentDotAmount.dot]}個${currentDotAmount.dot}`)
+
+            if (totalDotAmount[currentDotAmount.dot] < currentDotAmount.amount) {
+                alert('抓到ㄌ!!')
+                alert(isMyturn ? '你贏ㄌ!' : '你輸ㄌ..')
             }
             else {
-                startBtn.removeAttribute('disabled')
-                //point += currentDot 為何不能指派??
-                point.push(currentDot)
+                alert('抓錯ㄌ')
+                alert(isMyturn ? '失敗QQ' : '哈哈哈')
+            }
 
-                if (counterPoint.length == diceCounter.childElementCount && ownPoint.length == diceOwn.childElementCount) {
-                    setTimeout(function () {
-                        comparePoint()
-                    }, timeInterval)
-                }
+            switchShowingArea(true, startArea)
+        }
+
+        function notToCatch() {
+            //不抓! 顯示selectArea
+            switchShowingArea(true, selectArea)
+            setSelectors()
+        }
+
+        function setSelectors() {
+            let amountOpt = amountSelector.querySelectorAll('option')
+            let dotOpt = dotSelector.querySelectorAll('option')
+            amountOpt.forEach(x => x.removeAttribute('hidden'))
+            dotOpt.forEach(x => x.removeAttribute('hidden'))
+
+            //todo: 根據現在喊的點數數量限制selector?
+            amountSelector.onchange = function () {
+                console.log('change!')
             }
         }
 
-        function getRandom(max, min) {
-            return Math.ceil(Math.random() * (max - min)) + min
+        function getRandom(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min
         }
 
     </script>
