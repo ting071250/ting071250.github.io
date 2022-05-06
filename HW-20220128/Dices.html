@@ -196,7 +196,7 @@
             background-color: rgb(204, 201, 201);
         }
 
-        #inform{
+        #inform {
             width: 100px;
             font-size: 20px;
             position: absolute;
@@ -209,9 +209,23 @@
     </style>
 
     <title>Little Dice</title>
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-NZ5VJ56');</script>
+    <!-- End Google Tag Manager -->
 </head>
 
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NZ5VJ56" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <div class="header">
         <h1>骰子吹牛</h1>
     </div>
@@ -998,7 +1012,7 @@
 
         async function startGame() {
             //todo: 隨機決定誰先
-            
+
             ownDotAmount = { ...initDotAmount }
             counterDotAmount = { ...initDotAmount }
             currentDotAmount = { dot: 0, amount: 0 }
@@ -1124,8 +1138,8 @@
         }
 
         function counterMove() {
-            if (currentDotAmount.amount > counterDotAmount[currentDotAmount.dot] + 2 || 
-            (currentDotAmount.amount >= 6 && currentDotAmount.dot >= 6)) {
+            if (currentDotAmount.amount > counterDotAmount[currentDotAmount.dot] + 2 ||
+                (currentDotAmount.amount >= 6 && currentDotAmount.dot >= 6)) {
                 alert('對方抓你!')
                 toCatch()
                 return
