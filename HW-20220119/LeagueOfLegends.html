@@ -32,7 +32,7 @@
                 }
             }
     
-            .container {
+            .container first {
                 background-color: #ffffff30;
             }
     
@@ -254,7 +254,7 @@
     
             function setCard(role) {
                 let cloneCard = document.querySelector('#roleCard').content.cloneNode(true)
-                cloneCard.querySelector('img').src = `https://cdngarenanow-a.akamaihd.net/games/lol/2020/LOLwebsite/champion/${role.id}_0.jpg`
+                cloneCard.querySelector('img').src = `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${role.id}_0.jpg`
                 cloneCard.querySelector('.card-title').innerText = role.name
                 cloneCard.querySelector('.card-text').innerText = role.blurb.substring(0, 30) + '...'
                 cloneCard.querySelector('#detailBtn').addEventListener('click', setRoleModal.bind(event, role))
