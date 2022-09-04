@@ -6,7 +6,7 @@
     　　"sizes": "192×192",
     　　"type": "image/jpg"
     　　}],
-    　"start_url": "/SwellForecast.html",
+    　"start_url": "/index.html",
     　"background_color": "#000",
     　"theme_color": "#536878",
     　"display": "standalone"
