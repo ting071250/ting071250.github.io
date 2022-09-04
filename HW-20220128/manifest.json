@@ -1,0 +1,13 @@
+{
+    　"short_name": "CKedit!",
+    　"name": "CKedit!",
+    　"icons": [{
+    　　"src":"icons/192.png",
+    　　"sizes": "192×192",
+    　　"type": "image/png"
+    　　}],
+    　"start_url": "/SwellForecast.html",
+    　"background_color": "#000",
+    　"theme_color": "#536878",
+    　"display": "standalone"
+    }
