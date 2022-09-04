@@ -1,10 +1,10 @@
 {
-    　"short_name": "CKedit!",
-    　"name": "CKedit!",
+    　"short_name": "浪況預報",
+    　"name": "浪況預報",
     　"icons": [{
-    　　"src":"icons/192.png",
+    　　"src":"icons/swell-forecast.jpg",
     　　"sizes": "192×192",
-    　　"type": "image/png"
+    　　"type": "image/jpg"
     　　}],
     　"start_url": "/SwellForecast.html",
     　"background_color": "#000",
